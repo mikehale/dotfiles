@@ -1,13 +1,30 @@
 # ADD LOCAL CONFIGURATION HERE
-
 # DO NOT EDIT BELOW THIS LINE
 [alias]
   # log HEAD@{upstream}.. isn't working for me. Not sure why yet.
-	out = !git log --boundary $(git rev-list --max-count=1 --simplify-by-decoration HEAD^)..
-	st = status
+  out = !git log --boundary $(git rev-list --max-count=1 --simplify-by-decoration HEAD^)..
+  st = status
+  ci = commit
+  co = checkout
+  br = branch
+  spull = !git svn fetch && git svn rebase
+  spush = !git svn dcommit
+  headless = !sh -c 'git symbolic-ref HEAD refs/heads/$0 && rm .git/index && git clean -fdx'
 [color]
-	ui = auto
+  branch = auto
+  diff = auto
+  status = auto
+  ui = auto
+[apply]
+  whitespace = fix
 [core]
-	excludesfile = ~/.gitignore
+  whitespace = fix
+  excludesfile = ~/.gitignore
 [format]
-	pretty = format:%Cgreen%h%Creset%C(yellow)%d%Creset %s %C(cyan)%ar%Creset
+  pretty = format:%Cgreen%h%Creset%C(yellow)%d%Creset %s %C(cyan)%ar%Creset
+#[diff] 
+#  external = ~/bin/git-diff-driver.sh
+[push]
+  default = matching
+[branch]
+  autosetuprebase = always
