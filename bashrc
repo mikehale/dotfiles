@@ -5,14 +5,13 @@ alias CYAN='tput setaf 6'
 alias MAGENTA='tput setaf 5'
 alias RESET='tput sgr0'
 
-alias b='bundle exec bash'
-alias git='RUBYOPT= hub'
-alias gitx='gitx --all'
 alias ls='ls -h'
-alias man='gem man --system'
-alias migrate='rake db:migrate db:test:prepare'
-alias v=mvim
-alias wip='rake cucumber:wip'
+alias blog="cd $HOME/dev/blog"
+alias vlc='/Applications/VLC.app/Contents/MacOS/VLC'
+alias rake_complete_clean='rm ~/.raketabs*'
+alias mh="cd ~/dev/memberhub/application"
+# clear RUBYOPT when calling hub
+alias git='RUBYOPT= hub'
 
 function __bundler_ps1 {
   if [ -n "${BUNDLE_GEMFILE-}" ]; then
@@ -34,10 +33,8 @@ function pr {
   cd `ruby -rrbconfig -e 'puts Config::CONFIG["rubylibdir"]'`; ls
 }
 
-source ${HOME}/.homebrew/etc/bash_completion
-source ${HOME}/.homebrew/Library/Contributions/brew_bash_completion.sh
+# This file will source ~/.bash_completion
+source ${HOMEBREW_HOME}/etc/bash_completion
+source ${HOMEBREW_HOME}/Library/Contributions/brew_bash_completion.sh
 source ${HOME}/.rvm/scripts/rvm
-
-complete -W 'ls refresh start stop' downloads
-complete -C 'gem-complete' pg
-complete -C 'rake-complete' rake
+# source ${HOME}/.bin/git-prompt
