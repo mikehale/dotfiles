@@ -8,7 +8,7 @@ alias RESET='tput sgr0'
 alias ls='ls -h'
 alias blog="cd $HOME/dev/blog"
 alias vlc='/Applications/VLC.app/Contents/MacOS/VLC'
-alias rake_complete_clean='rm ~/.raketabs*'
+alias rake_complete_clean='rm -rf ~/.raketabs'
 alias mh="cd ~/dev/memberhub/application"
 # clear RUBYOPT when calling hub
 alias git='RUBYOPT= hub'
