@@ -37,4 +37,3 @@ function pr {
 source ${HOMEBREW_HOME}/etc/bash_completion
 source ${HOMEBREW_HOME}/Library/Contributions/brew_bash_completion.sh
 source ${HOME}/.rvm/scripts/rvm
-# source ${HOME}/.bin/git-prompt
