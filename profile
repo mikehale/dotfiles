@@ -20,7 +20,6 @@ export HISTSIZE=1000
 # Used here because they're also convenient for ri.
 export LESS='--quit-if-one-screen --RAW-CONTROL-CHARS --chop-long-lines --no-init'
 export PATH="${HOME}/.bin:${HOMEBREW_HOME}/bin:${HOME}/.rvm/bin:${PATH}:/Library/Application Support/VMware Fusion"
-export GEM_HOME="${HOMEBREW_HOME}/Cellar/gems/1.8"
 export PS1='\[$(CYAN)\]$(__rvm_ps1)$(__bundler_ps1)\[$(RESET)\]\w\[$(MAGENTA)\]$(__git_ps1)\[$(RESET)\] '
 export RI='--format ansi'
 export RSYNC_RSH='ssh'
