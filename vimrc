@@ -30,6 +30,9 @@ map <C-j> <C-w>j
 map <C-k> <C-w>k
 map <C-l> <C-w>l
 
+imap jj <Esc>
+
+
 " show trailing whitespace
 set list
 set listchars=tab:▸\ ,trail:▫
