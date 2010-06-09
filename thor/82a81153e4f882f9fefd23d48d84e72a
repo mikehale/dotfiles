@@ -1,0 +1,149 @@
+require 'active_resource'
+
+class Slicehost < Thor
+  desc "list_zones", "list all the zones you have access to"
+  def list_zones
+    Zone.find(:all).each do |zone|
+      puts zone.origin
+    end
+  end
+
+  desc "create_zone ZONE_NAME ZONE_IP", "create zone"
+  method_options :google_hosted_apps => :boolean, :spf => :boolean
+  def create_zone(zone_name, zone_ip)
+    zone_name = anchored_zone_name(zone_name)
+    if Zone.exists?(zone_name)
+      puts "Deleting old zone: #{zone_name}"
+      Zone.find_by_name(zone_name).destroy
+    end
+
+    z = Zone.new(:origin => zone_name, :ttl => 3600)
+    z.save
+
+    defaults = { :zone_id => z.id, :ttl => 3600 }
+
+    a_records = [
+      { :record_type => 'A', :name => zone_name,        :data => zone_ip },
+      { :record_type => 'A', :name => "*.#{zone_name}", :data => zone_ip }
+    ]
+
+    txt_records = []
+    if options[:spf]
+      includes = "include:aspmx.googlemail.com " if options[:google_hosted_apps]
+      txt_records << { :record_type => 'TXT', :name => zone_name, :data => "v=spf1 a mx #{includes}~all" }
+    end
+
+    google_mx = [
+      { :record_type => 'MX', :name => zone_name, :aux => 10, :data => 'ASPMX.L.GOOGLE.COM.'      },
+      { :record_type => 'MX', :name => zone_name, :aux => 20, :data => 'ALT1.ASPMX.L.GOOGLE.COM.' },
+      { :record_type => 'MX', :name => zone_name, :aux => 20, :data => 'ALT2.ASPMX.L.GOOGLE.COM.' },
+      { :record_type => 'MX', :name => zone_name, :aux => 30, :data => 'ASPMX2.GOOGLEMAIL.COM.'   },
+      { :record_type => 'MX', :name => zone_name, :aux => 30, :data => 'ASPMX3.GOOGLEMAIL.COM.'   },
+      { :record_type => 'MX', :name => zone_name, :aux => 30, :data => 'ASPMX4.GOOGLEMAIL.COM.'   },
+      { :record_type => 'MX', :name => zone_name, :aux => 30, :data => 'ASPMX5.GOOGLEMAIL.COM.'   }
+    ]
+
+    google_cname = [
+      { :record_type => 'CNAME', :name => 'mail',     :data => 'ghs.google.com.' },
+      { :record_type => 'CNAME', :name => 'start',    :data => 'ghs.google.com.' },
+      { :record_type => 'CNAME', :name => 'docs',     :data => 'ghs.google.com.' },
+      { :record_type => 'CNAME', :name => 'calendar', :data => 'ghs.google.com.' }
+    ]
+
+    google_srv = [
+      { :record_type => 'SRV', :name => "_xmpp-server._tcp.#{zone_name}", :aux => 5, :data => '0 5269 xmpp-server.l.google.com.'},
+      { :record_type => 'SRV', :name => "_xmpp-server._tcp.#{zone_name}", :aux => 20, :data => '0 5269 xmpp-server1.l.google.com.'},
+      { :record_type => 'SRV', :name => "_xmpp-server._tcp.#{zone_name}", :aux => 20, :data => '0 5269 xmpp-server2.l.google.com.'},
+      { :record_type => 'SRV', :name => "_xmpp-server._tcp.#{zone_name}", :aux => 20, :data => '0 5269 xmpp-server3.l.google.com.'},
+      { :record_type => 'SRV', :name => "_xmpp-server._tcp.#{zone_name}", :aux => 20, :data => '0 5269 xmpp-server4.l.google.com.'},
+      { :record_type => 'SRV', :name => "_jabber._tcp.#{zone_name}", :aux => 5, :data => '0 5269 xmpp-server.l.google.com.'},
+      { :record_type => 'SRV', :name => "_jabber._tcp.#{zone_name}", :aux => 20, :data => '0 5269 xmpp-server1.l.google.com.'},
+      { :record_type => 'SRV', :name => "_jabber._tcp.#{zone_name}", :aux => 20, :data => '0 5269 xmpp-server2.l.google.com.'},
+      { :record_type => 'SRV', :name => "_jabber._tcp.#{zone_name}", :aux => 20, :data => '0 5269 xmpp-server3.l.google.com.'},
+      { :record_type => 'SRV', :name => "_jabber._tcp.#{zone_name}", :aux => 20, :data => '0 5269 xmpp-server4.l.google.com.'}
+    ]
+
+    ns_records = [
+      { :record_type => 'NS', :name => zone_name, :data => 'ns1.slicehost.net.' },
+      { :record_type => 'NS', :name => zone_name, :data => 'ns2.slicehost.net.' },
+      { :record_type => 'NS', :name => zone_name, :data => 'ns3.slicehost.net.' }
+    ]
+
+    puts "\nCreating A records..."
+    a_records.each { |r| create_record(r, defaults) }
+
+    puts "\nCreating TXT records..."
+    txt_records.each { |r| create_record(r, defaults) }
+
+    puts "\nCreating NS records..."
+    ns_records.each { |r| create_record(r, defaults) }
+
+    if options[:google_hosted_apps]
+      puts "\nCreating Google MX records..."
+      google_mx.each { |r| create_record(r, defaults) }
+
+      puts "\nCreating Google SRV records..."
+      google_srv.each { |r| create_record(r, defaults) }
+
+      puts "\nCreating Google CNAME records..."
+      google_cname.each { |r| create_record(r, defaults) }
+    end
+
+    puts "\nALL DONE!"
+  end
+
+  no_tasks do
+    def anchored_zone_name(zone_name)
+      zone_name.sub(/(.*?)\.?$/, '\1.')
+    end
+
+    def create_record(r, defaults)
+      rec = Record.new(defaults.merge(r))
+      rec.save
+      puts notice(rec)
+    end
+
+    def notice(r)
+      ' | ' + r.name.to_s.ljust(30) + 
+      ' | ' + r.record_type.to_s.ljust(5) + 
+      ' | ' + r.aux.to_s.rjust(4) + 
+      ' | ' + r.data.to_s.ljust(34) + 
+      ' | '
+    end
+  end
+end
+
+# Get your API key from your SliceManager: https://manage.slicehost.com/api/
+API_PASSWORD = ENV['API_PASSWORD']
+SITE = "https://#{API_PASSWORD}@api.slicehost.com/"
+
+# Address class is required for Slice class
+class Address < String; end
+
+# Define the ActiveResource classes
+class Slice < ActiveResource::Base
+  self.site = SITE
+  def self.find_by_name(name)
+    Slice.find(:first, :params => { :name => name })
+  end
+end 
+
+class Zone < ActiveResource::Base
+  self.site = SITE
+  
+  def records
+    Record.find(:all, :params => { :zone_id => self.id })
+  end
+  
+  def self.exists?(name)
+    !Zone.find(:all, :params => { :origin => name }).empty?
+  end
+  
+  def self.find_by_name(name)
+    Zone.find(:first, :params => { :origin => name })
+  end
+end 
+
+class Record < ActiveResource::Base
+  self.site = SITE
+end
