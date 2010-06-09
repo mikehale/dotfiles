@@ -5,6 +5,7 @@ alias CYAN='tput setaf 6'
 alias MAGENTA='tput setaf 5'
 alias RESET='tput sgr0'
 
+alias psgrep='psgrep -an'
 alias ls='ls -h'
 alias blog="cd $HOME/dev/blog"
 alias vlc='/Applications/VLC.app/Contents/MacOS/VLC'
