@@ -1,0 +1,3 @@
+#!/bin/bash
+
+echo "`date +%r` : $1" >> ~/sonian/worklog/`date +%m-%d-%Y`.log
