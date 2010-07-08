@@ -7,7 +7,7 @@ alias RESET='tput sgr0'
 
 alias whatididyesterday='cat ~/sonian/worklog/`date -v -1d +%m-%d-%Y`.log'
 alias psgrep='psgrep -an'
-alias e='emacs'
+alias e='emacsclient'
 alias ls='ls -h'
 alias blog="cd $HOME/dev/blog"
 alias vlc='/Applications/VLC.app/Contents/MacOS/VLC'
