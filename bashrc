@@ -5,6 +5,7 @@ alias CYAN='tput setaf 6'
 alias MAGENTA='tput setaf 5'
 alias RESET='tput sgr0'
 
+alias whatididyesterday='cat ~/sonian/worklog/`date -v -1d +%m-%d-%Y`.log'
 alias psgrep='psgrep -an'
 alias e='emacs'
 alias ls='ls -h'
