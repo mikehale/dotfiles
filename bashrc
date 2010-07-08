@@ -36,6 +36,17 @@ function pr {
   cd `ruby -rrbconfig -e 'puts Config::CONFIG["rubylibdir"]'`; ls
 }
 
+function blade() {
+ config=$1
+ shift
+
+ if [[ -f ~/.chef/platform/knife-$config.rb ]]; then
+   knife "$@" -c ~/.chef/platform/knife-$config.rb
+ else
+   ls -la ~/.chef/platform/knife-$config.rb
+ fi
+}
+
 # This file will source ~/.bash_completion
 source ${HOMEBREW_HOME}/etc/bash_completion
 source ${HOMEBREW_HOME}/Library/Contributions/brew_bash_completion.sh
