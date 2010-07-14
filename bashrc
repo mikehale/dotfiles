@@ -5,7 +5,7 @@ alias CYAN='tput setaf 6'
 alias MAGENTA='tput setaf 5'
 alias RESET='tput sgr0'
 
-alias couchdb_tunnel='ssh -f -N -L cauldron.sa2s.us -L5983:localhost:5983'
+alias couchdb_tunnel='ssh cauldron.sa2s.us -f -N -L5983:localhost:5983'
 alias whatididyesterday='cat ~/sonian/worklog/`date -v -1d +%m-%d-%Y`.log'
 alias psgrep='psgrep -an'
 alias e='emacsclient'
