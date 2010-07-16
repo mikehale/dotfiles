@@ -37,6 +37,8 @@ export SERVICE_HOME="$AWS_CLOUDWATCH_HOME"
 export AWS_AUTO_SCALING_HOME="${HOMEBREW_HOME}/Cellar/auto-scaling/1.0.9.0"
 export AWS_ELB_HOME="${HOMEBREW_HOME}/Cellar/elastic-load-balancing/1.0.3.4"
 
+export CAULDRON_KEY="$HOME/sonian/keys/ssh/cauldron.pem"
+
 function set_ec2_keys {
   key_name=$1 
   export EC2_CERT="$HOME/.ec2/cert-$key_name.pem"
