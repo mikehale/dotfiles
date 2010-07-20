@@ -17,6 +17,7 @@ alias mh="cd ~/dev/memberhub/application"
 # clear RUBYOPT when calling hub
 alias git='RUBYOPT= hub'
 alias add_sonian_keys='ls /Users/mikehale/sonian/keys/ssh/* | xargs ssh-add'
+alias standup_order='ruby -e \'puts ["Tim","Mike","AJ","Darrin","John"].shuffle\''
 
 function __bundler_ps1 {
   if [ -n "${BUNDLE_GEMFILE-}" ]; then
