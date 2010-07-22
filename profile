@@ -23,7 +23,7 @@ export PATH="${HOME}/.bin:${HOMEBREW_HOME}/bin:${HOMEBREW_HOME}/sbin:${HOME}/.rv
 export PS1='\[$(CYAN)\]$(__rvm_ps1)$(__bundler_ps1)\[$(RESET)\]\w\[$(MAGENTA)\]$(__git_ps1)\[$(RESET)\] '
 export RI='--format ansi'
 export RSYNC_RSH='ssh'
-export EDITOR="emacsclient -a ''"
+export EDITOR="DISPLAY= emacsclient -a '' -c -s server"
 export GEMEDITOR=mate
 export JAVA_HOME=/System/Library/Frameworks/JavaVM.framework/Versions/CurrentJDK/Home/
 
