@@ -27,7 +27,7 @@ export EDITOR="emacsclient -a ''"
 export GEMEDITOR=mate
 export JAVA_HOME=/System/Library/Frameworks/JavaVM.framework/Versions/CurrentJDK/Home/
 
-if [ -n "${SSH_AUTH_SOCK2:-x}" ] ; then
+if [ -n "${SSH_AUTH_SOCK:-x}" ] ; then
   export SSH_AUTH_SOCK=`ls /tmp/launch-*/Listeners`
 fi
 
