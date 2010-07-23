@@ -25,9 +25,8 @@ function __bundler_ps1 {
 }
 
 function __rvm_ps1 {
-  if [ -f ~/.rvm/bin/rvm-prompt ]; then
-     printf "${1-(%s) }" "$(~/.rvm/bin/rvm-prompt)"
-  fi
+  ruby_version=$(~/.rvm/bin/rvm-prompt 2> /dev/null) || return
+  echo "($ruby_version) "
 }
 
 function pg {
