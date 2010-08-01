@@ -20,7 +20,6 @@
 [core]
   whitespace = fix
   excludesfile = ~/.gitignore
-  autocrlf = true
 [format]
   pretty = format:%Cgreen%h%Creset%C(yellow)%d%Creset %s %C(cyan)%ar%Creset
 #[diff] 
