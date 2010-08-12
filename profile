@@ -1,5 +1,3 @@
-# vim: set filetype=sh :
-
 # Use ~/.profile for things that can be inherited by subshells. As far as I
 # know right now, that just means environment variables.
 
@@ -32,7 +30,12 @@ if [ -n "${SSH_AUTH_SOCK:-x}" ] ; then
 fi
 
 # On OSX make sure TERM is set
-export TERM=xterm
+# if [ "$TERM_PROGRAM" = "Apple_Terminal" ]; then
+#     export TERM=xterm-16color
+# fi
+if [ "$TERM_PROGRAM" = "iTerm.app" ]; then
+    export TERM=xterm-256color
+fi
 
 # Add AWS tools
 export EC2_HOME="${HOMEBREW_HOME}/Cellar/ec2-api-tools/1.3-46266"
