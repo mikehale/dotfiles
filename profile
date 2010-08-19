@@ -30,9 +30,9 @@ if [ -n "${SSH_AUTH_SOCK:-x}" ] ; then
 fi
 
 # On OSX make sure TERM is set
-# if [ "$TERM_PROGRAM" = "Apple_Terminal" ]; then
-#     export TERM=xterm-16color
-# fi
+if [ "$TERM_PROGRAM" = "Apple_Terminal" ]; then
+    export TERM=xterm-color
+fi
 if [ "$TERM_PROGRAM" = "iTerm.app" ]; then
     export TERM=xterm-256color
 fi
