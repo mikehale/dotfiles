@@ -17,6 +17,7 @@ alias mh="cd ~/dev/memberhub/application"
 # clear RUBYOPT when calling hub
 alias git='RUBYOPT= hub'
 alias standup_order='ruby -e "puts %w[Tim Mike AJ Darrin Michael].shuffle"'
+alias tmux_main='tmux attach -t main || tmux new -s main'
 
 function __bundler_ps1 {
   if [ -n "${BUNDLE_GEMFILE-}" ]; then
