@@ -21,8 +21,9 @@ export PATH="${HOME}/.bin:${HOMEBREW_HOME}/bin:${HOMEBREW_HOME}/sbin:${HOME}/.rv
 export PS1='\[$(CYAN)\]$(__rvm_ps1)$(__bundler_ps1)\[$(RESET)\]\w\[$(MAGENTA)\]$(__git_ps1)\[$(RESET)\] '
 export RI='--format ansi'
 export RSYNC_RSH='ssh'
-export EDITOR="DISPLAY= emacsclient -a '' -c -s server"
-export GEMEDITOR=mate
+export DISPLAY=''
+export EDITOR="emacsclient -t"
+export GEMEDITOR=$EDITOR
 export JAVA_HOME=/System/Library/Frameworks/JavaVM.framework/Versions/CurrentJDK/Home/
 
 if [ -n "${SSH_AUTH_SOCK:-x}" ] ; then
@@ -37,14 +38,19 @@ if [ "$TERM_PROGRAM" = "iTerm.app" ]; then
     export TERM=xterm-256color
 fi
 
+# Go Stuff
+export GOROOT=`brew --cellar`/go/HEAD
+export GOBIN=/usr/local/bin
+export GOARCH=amd64
+export GOOS=darwin
+
 # Add AWS tools
-export EC2_HOME="${HOMEBREW_HOME}/Cellar/ec2-api-tools/1.3-46266"
+export EC2_HOME="${HOMEBREW_HOME}/Cellar/ec2-api-tools/1.3-57419/jars"
 export AWS_CLOUDWATCH_HOME="${HOMEBREW_HOME}/Cellar/cloud-watch/1.0.2.3"
 export SERVICE_HOME="$AWS_CLOUDWATCH_HOME"
 export AWS_AUTO_SCALING_HOME="${HOMEBREW_HOME}/Cellar/auto-scaling/1.0.9.0"
 export AWS_ELB_HOME="${HOMEBREW_HOME}/Cellar/elastic-load-balancing/1.0.3.4"
-
-export CAULDRON_KEY="$HOME/sonian/keys/ssh/cauldron.pem"
+export AWS_RDS_HOME="/usr/local/Cellar/rds-command-line-tools/1.2.006/jars"
 
 function set_ec2_keys {
   key_name=$1 

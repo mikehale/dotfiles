@@ -18,6 +18,8 @@ alias mh="cd ~/dev/memberhub/application"
 alias git='RUBYOPT= hub'
 alias standup_order='ruby -e "puts %w[Tim Mike AJ Darrin Michael].shuffle"'
 alias tmux_main='tmux attach -t main || tmux new -s main'
+alias kill_ssh="psgrep 'ssh ' | awk '{ print $2 }'| xargs kill"
+alias ec='emacsclient'
 
 function __bundler_ps1 {
   if [ -n "${BUNDLE_GEMFILE-}" ]; then
@@ -53,3 +55,4 @@ function blade() {
 source ${HOMEBREW_HOME}/etc/bash_completion
 source ${HOMEBREW_HOME}/Library/Contributions/brew_bash_completion.sh
 source ${HOME}/.rvm/scripts/rvm
+
