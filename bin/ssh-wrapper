@@ -1,0 +1,13 @@
+#!/usr/bin/perl
+use strict;
+my @newargs = ( "ssh" );
+my $added = 0;
+for my $arg (@ARGV) {
+    # replace "scp" with "sudo scp"
+    if ($arg =~ /^scp / and $added == 0) {
+        $arg =~ s/^/sudo /;
+        $added = 1;
+    }
+    push @newargs, $arg;
+}
+exec @newargs;
