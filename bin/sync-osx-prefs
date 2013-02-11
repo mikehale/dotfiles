@@ -1,0 +1,42 @@
+#!/bin/zsh
+
+OP="${1}"
+shift
+
+case "${OP}" in
+    export|import);
+        ;;
+    *)
+        echo "Usage: prefs <export|import> <app>" 1>&2
+        return 1
+        ;;
+esac
+
+NAME=$(echo "${1}" | tr A-Z a-z)
+DIR="Library/Preferences"
+PLIST=
+
+case ${NAME} in
+    iterm)
+        PLIST="com.googlecode.iterm2.plist"
+        ;;
+    terminal)
+        PLIST="com.apple.Terminal.plist"
+        ;;
+    *)
+        echo "Uknown App name ${1}" 1>&2
+        return 10
+        ;;
+esac
+
+BIN="${HOME}/${DIR}/${PLIST}"
+XML="${HOME}/dev/dotfiles/${PLIST}"
+
+case "${OP}" in
+    export)
+        plutil -convert xml1 "${BIN}" -o "${XML}"
+        ;;
+    import)
+        plutil -convert binary1 "${XML}" -o "${BIN}"
+        ;;
+esac
