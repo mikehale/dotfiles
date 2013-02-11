@@ -29,42 +29,19 @@ function el() { psgrep -i emacs }
 function ek() { /usr/local/bin/emacsclient -e '(kill-emacs)' -s $1 }
 alias emacs=e
 
-alias buffer_to_clipboard='tmux show-buffer|pbcopy'
-alias buffer_to_gist='tmux show-buffer|gist -op'
 alias psgrep='psgrep -an'
 alias ls='ls -h'
 alias blog="cd $HOME/dev/blog"
 alias vlc='/Applications/VLC.app/Contents/MacOS/VLC'
 alias rake_complete_clean='rm -rf ~/.raketabs'
-alias tmux_main='tmux attach -t main || tmux new -s main'
 alias kill_ssh="psgrep 'ssh ' | awk '{ print $2 }'| xargs kill"
 alias tat='[ -z "${TMUX}" ] && (tmux attach || tmux new)'
 alias which='nocorrect which'
+alias dnsclearcache='dscacheutil -flushcache '
+alias 'be=bundle exec'
 
 function git(){hub "$@"}
 
-function cleanup_node() {
-  knife client delete $1 -y ; knife node delete $1 -y
-}
-
-function terminate_and_cleanup_node() {
-  knife ec2 server delete $1 ; knife client delete $1 -y ; knife node delete $1 -y
-}
-
-function knife_ssh(){
-  query=$1
-  position=$2
-  if [ -z "$position" ]; then
-    position=1
-  fi
-
-  echo "Finding a server matching $query in $ENV at position $position"
-  server=$(knife search node $query -a ec2.public_hostname -i|head -n $position|tail -n 1)
-  echo "Found: $server"
-  ssh $server
-}
-
-alias dnsclearcache='dscacheutil -flushcache '
 
 # Heroku
 alias hk='nocorrect hk'
