@@ -25,7 +25,7 @@ export DISPLAY=''
 export ALTERNATIVE_EDITOR=""
 export EDITOR="emacsclient -t"
 
-export JAVA_HOME="$(/usr/libexec/java_home)"
+export JAVA_HOME=/System/Library/Frameworks/JavaVM.framework/Versions/CurrentJDK/Home/
 export NODE_PATH=$NODE_PATH:${HOMEBREW_HOME}/lib/node_modules
 
 if [ -n "${SSH_AUTH_SOCK:-x}" ] ; then

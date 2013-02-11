@@ -1,4 +1,5 @@
 # -*- mode: ruby -*-
+
 require 'rubygems'
 require 'irb/completion'
 
