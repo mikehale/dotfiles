@@ -177,3 +177,8 @@ fi
 
 export GPG_TTY=$(tty)
 export GPG_SIGNING_KEY="mhale@heroku.com"
+
+pman () {
+  man -t "${1}" | open -f -a /Applications/Preview.app
+}
+
