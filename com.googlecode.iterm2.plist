@@ -4511,13 +4511,13 @@
 	<key>NSWindow Frame Bookmarks</key>
 	<string>466 -301 896 261 254 -900 1440 900 </string>
 	<key>NSWindow Frame Preferences</key>
-	<string>299 209 924 485 0 0 1680 1050 </string>
+	<string>561 349 924 485 0 0 2560 1440 </string>
 	<key>NSWindow Frame SUStatusFrame</key>
 	<string>770 786 384 129 0 0 1920 1178 </string>
 	<key>NSWindow Frame UKCrashReporter</key>
 	<string>127 444 592 584 0 0 1680 1028 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>208 119 598 399 0 0 1680 1028 </string>
+	<string>1238 83 1306 1335 0 0 2560 1418 </string>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -5927,7 +5927,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2013-02-11T19:29:29Z</date>
+	<date>2013-02-12T19:29:28Z</date>
 	<key>SavePasteHistory</key>
 	<false/>
 	<key>Secure Input</key>
