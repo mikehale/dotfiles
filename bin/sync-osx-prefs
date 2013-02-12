@@ -37,6 +37,7 @@ case "${OP}" in
         plutil -convert xml1 "${BIN}" -o "${XML}"
         ;;
     import)
+        echo "WARNING: ensure iterm is shutdown before importing to avoid having imported settings overwritten"
         plutil -convert binary1 "${XML}" -o "${BIN}"
         ;;
 esac
