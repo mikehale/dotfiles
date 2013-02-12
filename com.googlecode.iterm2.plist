@@ -4928,6 +4928,13 @@
 					<key>Text</key>
 					<string>[1;4D</string>
 				</dict>
+				<key>0xf702-0x2c0000</key>
+				<dict>
+					<key>Action</key>
+					<integer>10</integer>
+					<key>Text</key>
+					<string>[1;7D</string>
+				</dict>
 				<key>0xf702-0x2e0000</key>
 				<dict>
 					<key>Action</key>
