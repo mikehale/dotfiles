@@ -14,7 +14,7 @@ export LESS='--quit-if-one-screen --RAW-CONTROL-CHARS --chop-long-lines --no-ini
 
 # PATH
 export PATH="/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin"
-export PATH="${HOME}/.bin:${HOMEBREW_HOME}/bin:${HOMEBREW_HOME}/sbin:${PATH}:/Library/Application Support/VMware Fusion:/usr/local/CrossPack-AVR-20120217/bin"
+export PATH="${HOME}/.bin:${HOMEBREW_HOME}/bin:${HOMEBREW_HOME}/sbin:${PATH}:/Library/Application Support/VMware Fusion:/usr/local/CrossPack-AVR-20120217/bin:/Applications/MakeMKV.app/Contents/MacOS"
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
 export PATH="/usr/local/heroku/bin:/usr/local/foreman/bin:$PATH"
