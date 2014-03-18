@@ -4,7 +4,11 @@
 <dict>
 	<key>AFRStrokeThickness</key>
 	<real>-0.10000000149011612</real>
+	<key>AdjustWindowForFontSizeChange</key>
+	<true/>
 	<key>AdvancedFontRendering</key>
+	<false/>
+	<key>AllowClipboardAccess</key>
 	<false/>
 	<key>AnimateDimming</key>
 	<false/>
@@ -17,7 +21,7 @@
 	<key>AutoHideTmuxClientSession</key>
 	<false/>
 	<key>CheckTestRelease</key>
-	<true/>
+	<false/>
 	<key>ClosingHotkeySwitchesSpaces</key>
 	<false/>
 	<key>ColorInvertedCursor</key>
@@ -4376,6 +4380,8 @@
 	<string></string>
 	<key>NSRepeatCountBinding</key>
 	<string></string>
+	<key>NSScrollAnimationEnabled</key>
+	<false/>
 	<key>NSTableView Columns BookmarksView5</key>
 	<array>
 		<data>
@@ -4508,16 +4514,27 @@
 		</data>
 		<true/>
 	</array>
+	<key>NSToolbar Configuration Terminal Toolbar</key>
+	<dict>
+		<key>TB Display Mode</key>
+		<integer>1</integer>
+		<key>TB Icon Size Mode</key>
+		<integer>1</integer>
+		<key>TB Is Shown</key>
+		<integer>0</integer>
+		<key>TB Size Mode</key>
+		<integer>1</integer>
+	</dict>
 	<key>NSWindow Frame Bookmarks</key>
 	<string>466 -301 896 261 254 -900 1440 900 </string>
 	<key>NSWindow Frame Preferences</key>
-	<string>561 349 924 485 0 0 2560 1440 </string>
+	<string>441 280 924 485 0 0 1680 1050 </string>
 	<key>NSWindow Frame SUStatusFrame</key>
 	<string>770 786 384 129 0 0 1920 1178 </string>
 	<key>NSWindow Frame UKCrashReporter</key>
 	<string>127 444 592 584 0 0 1680 1028 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>1238 83 1306 1335 0 0 2560 1418 </string>
+	<string>5 22 1669 1006 0 0 1680 1028 </string>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -4546,11 +4563,11 @@
 			<key>Ansi 10 Color</key>
 			<dict>
 				<key>Blue Component</key>
-				<real>0.62352943420410156</real>
+				<real>0.10124903172254562</real>
 				<key>Green Component</key>
-				<real>0.74901962280273438</real>
-				<key>Red Component</key>
 				<real>0.76470589637756348</real>
+				<key>Red Component</key>
+				<real>0.033789355307817459</real>
 			</dict>
 			<key>Ansi 11 Color</key>
 			<dict>
@@ -5850,7 +5867,7 @@
 			<key>Visual Bell</key>
 			<true/>
 			<key>Window Type</key>
-			<integer>0</integer>
+			<integer>1</integer>
 			<key>Working Directory</key>
 			<string>/Users/mikehale</string>
 		</dict>
@@ -5923,11 +5940,13 @@
 	<key>SUEnableAutomaticChecks</key>
 	<true/>
 	<key>SUFeedURL</key>
-	<string>http://iterm2.googlecode.com/svn/trunk/appcasts/testing.xml</string>
+	<string>http://iterm2.googlecode.com/svn/trunk/appcasts/final.xml</string>
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2013-02-12T19:29:28Z</date>
+	<date>2014-03-17T17:00:58Z</date>
+	<key>SUSkippedVersion</key>
+	<string>1.0.0.20130622</string>
 	<key>SavePasteHistory</key>
 	<false/>
 	<key>Secure Input</key>
@@ -6019,6 +6038,6 @@
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>1.0.0.20120203</string>
+	<string>1.0.0.20130319</string>
 </dict>
 </plist>
