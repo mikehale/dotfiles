@@ -41,7 +41,7 @@ fi
 # fi
 
 # # Go Stuff
-export GOROOT=`brew --cellar`/go/r60.3
+export GOROOT=`brew --cellar`/go/1.1.1
 export GOBIN=/usr/local/bin
 export GOARCH=amd64
 export GOOS=darwin

@@ -2,8 +2,7 @@
 export ZSH=$HOME/.oh-my-zsh
 # Set to the name theme to load.
 # Look in ~/.oh-my-zsh/themes/
-# export ZSH_THEME="robbyrussell"
-export ZSH_THEME="bira"
+export ZSH_THEME="mikehale"
 
 # Set to this to use case-sensitive completion
 # export CASE_SENSITIVE="true"
@@ -16,7 +15,7 @@ export ZSH_THEME="bira"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git ruby brew gem rake heroku)
+plugins=(git ruby brew rake rbenv hk heroku gem)
 
 source $ZSH/oh-my-zsh.sh
 source $HOME/.zprofile
@@ -39,9 +38,9 @@ alias tat='[ -z "${TMUX}" ] && (tmux attach || tmux new)'
 alias which='nocorrect which'
 alias dnsclearcache='dscacheutil -flushcache '
 alias 'be=bundle exec'
+alias wake-shuttle="wakeonlan 80:ee:73:04:58:9b"
 
 function git(){hub "$@"}
-
 
 # Heroku
 alias hk='nocorrect hk'
@@ -158,4 +157,3 @@ export GPG_SIGNING_KEY="mhale@heroku.com"
 pman () {
   man -t "${1}" | open -f -a /Applications/Preview.app
 }
-
