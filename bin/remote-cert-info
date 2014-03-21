@@ -1,0 +1,8 @@
+#!/bin/bash
+#
+# usage: remote-cert-info remote.host.name [port]
+#
+REMHOST=$1
+REMPORT=${2:-443}
+
+fetch-cert $1 $2 | openssl x509 -noout -issuer -subject -dates -hash -fingerprint
