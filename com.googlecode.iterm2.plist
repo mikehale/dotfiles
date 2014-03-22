@@ -4527,10 +4527,12 @@
 	</dict>
 	<key>NSWindow Frame Bookmarks</key>
 	<string>466 -301 896 261 254 -900 1440 900 </string>
+	<key>NSWindow Frame NSFontPanel</key>
+	<string>914 84 445 270 0 0 1680 1050 </string>
 	<key>NSWindow Frame Preferences</key>
-	<string>441 280 924 485 0 0 1680 1050 </string>
+	<string>6 461 924 485 0 0 1680 1050 </string>
 	<key>NSWindow Frame SUStatusFrame</key>
-	<string>770 786 384 129 0 0 1920 1178 </string>
+	<string>648 690 384 129 0 0 1680 1050 </string>
 	<key>NSWindow Frame UKCrashReporter</key>
 	<string>127 444 592 584 0 0 1680 1028 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
@@ -5697,11 +5699,11 @@
 			<key>Name</key>
 			<string>Default</string>
 			<key>Non Ascii Font</key>
-			<string>Mensch-Regular 12</string>
+			<string>HiraMaruPro-W4 9</string>
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Normal Font</key>
-			<string>Mensch-Regular 12</string>
+			<string>AnonymousPro 18</string>
 			<key>Option Key Sends</key>
 			<integer>2</integer>
 			<key>Prompt Before Closing 2</key>
@@ -5944,7 +5946,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2014-03-17T17:00:58Z</date>
+	<date>2014-03-22T01:42:09Z</date>
 	<key>SUSkippedVersion</key>
 	<string>1.0.0.20130622</string>
 	<key>SavePasteHistory</key>
