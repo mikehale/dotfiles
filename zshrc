@@ -15,7 +15,7 @@ export ZSH_THEME="mikehale"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git ruby brew rake rbenv hk heroku gem)
+plugins=(gitfast ruby brew rake rbenv hk heroku gem)
 
 source $ZSH/oh-my-zsh.sh
 source $HOME/.zprofile
