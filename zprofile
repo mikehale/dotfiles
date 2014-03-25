@@ -22,6 +22,7 @@ export PATH="${HOME}/.bin:${HOMEBREW_HOME}/bin:${HOMEBREW_HOME}/sbin:${PATH}:/Li
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
 export PATH="/usr/local/heroku/bin:/usr/local/foreman/bin:$PATH"
+export PATH="/Applications/Postgres.app/Contents/MacOS/bin:$PATH"
 
 export RI='--format ansi'
 export RSYNC_RSH='ssh'
