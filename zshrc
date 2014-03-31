@@ -39,6 +39,7 @@ alias which='nocorrect which'
 alias dnsclearcache='dscacheutil -flushcache '
 alias 'be=bundle exec'
 alias wake-shuttle="wakeonlan 80:ee:73:04:58:9b"
+alias which="whence -p"
 
 function git(){hub "$@"}
 
