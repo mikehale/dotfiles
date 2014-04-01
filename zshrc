@@ -21,11 +21,11 @@ source $ZSH/oh-my-zsh.sh
 source $HOME/.zprofile
 
 # Emacs shell shortcuts
-function e()  { /usr/local/bin/emacs -nw $@ }
-function ec() { /usr/local/bin/emacsclient -t $@ }
-function es() { e --daemon=$1 && ec -s $1 }
+function e()  { emacs -nw "$@" }
+function ec() { emacsclient -t "$@" }
+function es() { e --daemon && ec -s }
 function el() { psgrep -i emacs }
-function ek() { /usr/local/bin/emacsclient -e '(kill-emacs)' -s $1 }
+function ek() { emacsclient -e '(kill-emacs)' }
 alias emacs=e
 
 alias psgrep='psgrep -an'
@@ -121,7 +121,7 @@ alias ion-client='TERM=xterm nocorrect ion-client'
 alias ic='ion-client'
 alias 'h=heroku'
 
-function aws_set { 
+function aws_set {
   export AWS_DIR=$HOME/dev/heroku/secrets/aws/$1@heroku.com
   export EC2_PRIVATE_KEY=${AWS_DIR}/pk.pem
   export EC2_CERT=${AWS_DIR}/cert.pem
