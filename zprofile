@@ -3,12 +3,6 @@
 
 export HOMEBREW_HOME="$(/usr/local/bin/brew --prefix)"
 export CLICOLOR=yes
-export GIT_PS1_SHOWDIRTYSTATE=yes
-export GIT_PS1_SHOWSTASHSTATE=yes
-export GIT_PS1_SHOWUNTRACKEDFILES=yes
-export GIT_PS1_SHOWUPSTREAM=yes
-export GIT_PS1_SHOWCOLORHINTS=yes
-export GIT_PS1_DESCRIBE_STYLE=branch
 
 export GREP_COLOR='30;102'
 export GREP_OPTIONS='--color'
