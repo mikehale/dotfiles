@@ -1,3 +1,6 @@
+# Load rbenv first so that we can control the global ruby
+eval "$(rbenv init -)"
+
 source $HOME/projects/dotfiles/antigen/antigen.zsh
 antigen use oh-my-zsh
 antigen bundle robbyrussell/oh-my-zsh plugins/ruby
@@ -27,9 +30,9 @@ SAVEHIST=1000
 bindkey -e
 # End of lines configured by zsh-newuser-install
 
-# Load rbenv
-eval "$(rbenv init -)"
-
 # Aliases
 alias cdd="cd ~/projects/dotfiles"
 alias cdh="cd ~/projects/heroku"
+eval "$(hub alias -s)"
+alias h=heroku
+alias hs="heroku sudo --reason b"
