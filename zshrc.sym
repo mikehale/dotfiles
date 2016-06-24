@@ -1,7 +1,18 @@
-# fpath=($(brew --prefix)/share/zsh/site-functions $fpath)
-# fpath=($(brew --prefix)/share/zsh-completions $fpath)
-
-#antigen bundle zsh-users/zsh-completions src
+source $HOME/projects/dotfiles/antigen/antigen.zsh
+antigen use oh-my-zsh
+antigen bundle robbyrussell/oh-my-zsh plugins/ruby
+antigen bundle git
+antigen bundle heroku
+antigen bundle command-not-found
+antigen bundle common-aliases
+antigen bundle brew
+antigen bundle compleat
+antigen bundle osx
+antigen bundle zsh-users/zsh-completions src
+antigen bundle zsh-users/zsh-syntax-highlighting
+antigen bundle zsh-users/zsh-autosuggestions
+antigen theme gnzh
+antigen apply
 
 # The following lines were added by compinstall
 zstyle :compinstall filename '/Users/mhale/.zshrc'
@@ -18,3 +29,7 @@ bindkey -e
 
 # Load rbenv
 eval "$(rbenv init -)"
+
+# Aliases
+alias cdd="cd ~/projects/dotfiles"
+alias cdh="cd ~/projects/heroku"
