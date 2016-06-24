@@ -1,3 +1,6 @@
 .netrwhist
-emacs.d/backups
 /bin/git-password
+/emacs.d.sym/backups
+/emacs.d.sym/elpa
+/emacs.d.sym/recentf
+/emacs.d.sym/projectile-bookmarks.eld
