@@ -1,2 +1,0 @@
-* try enh-ruby-mode
-* fix bundler

@@ -1,2 +1,0 @@
-complete -C $HOME/.bash_completion.d/rake_autocomplete -o default rake
-complete -C 'gem-complete' pg
