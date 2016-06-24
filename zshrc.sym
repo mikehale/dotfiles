@@ -1,0 +1,20 @@
+# fpath=($(brew --prefix)/share/zsh/site-functions $fpath)
+# fpath=($(brew --prefix)/share/zsh-completions $fpath)
+
+#antigen bundle zsh-users/zsh-completions src
+
+# The following lines were added by compinstall
+zstyle :compinstall filename '/Users/mhale/.zshrc'
+
+autoload -Uz compinit
+compinit
+# End of lines added by compinstall
+# Lines configured by zsh-newuser-install
+HISTFILE=~/.histfile
+HISTSIZE=1000
+SAVEHIST=1000
+bindkey -e
+# End of lines configured by zsh-newuser-install
+
+# Load rbenv
+eval "$(rbenv init -)"

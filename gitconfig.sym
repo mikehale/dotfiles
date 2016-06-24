@@ -1,0 +1,47 @@
+[user]
+        name = Michael Hale
+        email = mike@hales.ws
+[alias]
+        # log HEAD@{upstream}.. isn't working for me. Not sure why yet.
+        logs = !git log --find-copies-harder --summary
+        out = !git log --boundary $(git rev-list --max-count=1 --simplify-by-decoration HEAD^)..
+        nb = !echo v$(( $(git br -r |grep v| awk -F '/v' '{print $2}'|sort -n|tail -n1) + 1))
+        st = status -s
+        ci = commit
+        co = checkout
+        br = branch
+        spull = !git svn fetch && git svn rebase
+        spush = !git svn dcommit
+        headless = !sh -c 'git symbolic-ref HEAD refs/heads/$0 && rm .git/index && git clean -fdx'
+        wdiff = diff --color-words
+        m = merge --no-ff
+        cleanbranches = !~/.bin/git_clean_branches.sh
+[color]
+        branch = auto
+        diff = auto
+        status = auto
+        ui = auto
+[apply]
+        whitespace = fix
+[core]
+        whitespace = fix
+        excludesfile = /Users/mikehale/.gitignore
+[format]
+        pretty = format:%Cgreen%h%Creset %an %C(yellow)%d%Creset %s %C(cyan)%ar%Creset
+        #[diff]
+        #  external = ~/bin/git-diff-driver.sh
+[push]
+        default = tracking
+[branch]
+        autosetuprebase = always
+# [rerere]
+#         enabled = 1
+[difftool "sourcetree"]
+        cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+        path =
+[mergetool "sourcetree"]
+        cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+        trustExitCode = true
+
+[include]
+    path = ~/.gitconfig_private

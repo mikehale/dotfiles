@@ -1,0 +1,9 @@
+#!/usr/bin/env ruby
+
+require "fileutils"
+require "pathname"
+
+Pathname(__FILE__).dirname.entries.select{ |f| f.extname == ".sym" }.each do |source|
+  target = File.expand_path("~/.#{source.basename(".sym")}")
+  FileUtils.ln_s(source.realpath, target, force: true, verbose: true)
+end
