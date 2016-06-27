@@ -30,9 +30,13 @@ SAVEHIST=1000
 bindkey -e
 # End of lines configured by zsh-newuser-install
 
+export ALTERNATIVE_EDITOR=""
+export EDITOR="emacsclient -t"
+
 # Aliases
 alias cdd="cd ~/projects/dotfiles"
 alias cdh="cd ~/projects/heroku"
 eval "$(hub alias -s)"
 alias h=heroku
 alias hs="heroku sudo --reason b"
+alias e="$EDITOR"
