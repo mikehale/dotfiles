@@ -110,14 +110,18 @@
                    helm-recentf-fuzzy-match t
                    helm-semantic-fuzzy-match t
                    helm-imenu-fuzzy-match t)
-             (use-package semantic) ; this doesn't work?
+             (use-package semantic
+               :init   (progn
+                         (semantic-mode 1)))
              (use-package helm-projectile
                :ensure t
                ;; :pin    melpa-stable
                :bind   (
-                        ("C-c h i" . helm-semantic-or-imenu)
+                        ("C-c h" . helm-projectile)
+                        ;; ("C-c h i" . helm-semantic-or-imenu)
                         ([remap switch-to-buffer] . helm-mini)
                         ([remap find-file] . helm-find-files)
+                        ([remap projectile-switch-project] . helm-projectile-switch-project)
                         )))
   :bind   (([remap execute-extended-command] . helm-M-x))
   :diminish helm-mode)
