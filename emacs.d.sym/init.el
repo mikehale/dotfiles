@@ -72,6 +72,9 @@
                                         ; export EDITOR=emacsclient -t
   )
 
+(use-package hydandata-light-theme
+  :ensure t)
+
 (use-package smart-mode-line
   :ensure t
   :config (progn
