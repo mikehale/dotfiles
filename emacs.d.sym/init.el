@@ -72,6 +72,10 @@
                                         ; export EDITOR=emacsclient -t
   )
 
+(use-package exec-path-from-shell
+  :ensure t
+  :init (exec-path-from-shell-initialize))
+
 (use-package hydandata-light-theme
   :ensure t)
 
