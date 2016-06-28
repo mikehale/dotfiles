@@ -193,14 +193,12 @@
                    :ensure t
                    :config (inf-ruby-switch-setup))
                  (use-package bundler :ensure t)
-                 (setq ruby-deep-indent-paren nil
-                       ruby-insert-encoding-magic-comment nil
-                       end-ruby-deep-indent-paren nil
-                       end-ruby-deep-arglist t
-                       enh-ruby-hanging-brace-deep-indent-level 2
+                 (setq enh-ruby-bounce-deep-indent t
+                       enh-ruby-deep-indent-paren t
+                       enh-ruby-hanging-brace-deep-indent-level 1
                        enh-ruby-hanging-brace-indent-level 2
                        enh-ruby-hanging-indent-level 2
-                       enh-ruby-hanging-paren-deep-indent-level 2
+                       enh-ruby-hanging-paren-deep-indent-level 0
                        enh-ruby-hanging-paren-indent-level 2
                        enh-ruby-indent-level 2)))
 
