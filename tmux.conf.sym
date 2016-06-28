@@ -50,8 +50,8 @@ set -g default-terminal "xterm-256color"
 # open a man page in new window
 bind-key / command-prompt "new-window 'exec man %%'"
 
-# instructs tmux to expect UTF-8 sequences
-setw -g utf8 on
+# # instructs tmux to expect UTF-8 sequences
+# setw -g utf8 on
 
 # xterm-style function key sequences
 setw -g xterm-keys on
@@ -63,39 +63,39 @@ bind-key C-d detach
 # Set window notifications
 setw -g monitor-activity on
 
-#bind-key b "save-buffer /tmp/tmux-buffer" "exec sh -c 'pbcopy < /tmp/tmux-buffer'"
-bind-key b save-buffer /tmp/tmux-buffer \; run-shell "cat /tmp/tmux-buffer | pbcopy"
+# #bind-key b "save-buffer /tmp/tmux-buffer" "exec sh -c 'pbcopy < /tmp/tmux-buffer'"
+# bind-key b save-buffer /tmp/tmux-buffer \; run-shell "cat /tmp/tmux-buffer | pbcopy"
 
-set -g default-shell ${HOMEBREW_HOME}/bin/zsh
-set -g default-command "reattach-to-user-namespace -l zsh"
-set -g update-environment "DISPLAY SSH_ASKPASS SSH_AUTH_SOCK SSH_AGENT_PID SSH_CONNECTION WINDOWID XAUTHORITY"
+# set -g default-shell ${HOMEBREW_HOME}/bin/zsh
+# set -g default-command "reattach-to-user-namespace -l zsh"
+# set -g update-environment "DISPLAY SSH_ASKPASS SSH_AUTH_SOCK SSH_AGENT_PID SSH_CONNECTION WINDOWID XAUTHORITY"
 
-# From: http://tangledhelix.com/blog/2012/07/16/tmux-and-mouse-mode/
+# # From: http://tangledhelix.com/blog/2012/07/16/tmux-and-mouse-mode/
 
-# Toggle mouse on with ^Z m
-bind m \
-  set -g mode-mouse on \;\
-  set -g mouse-resize-pane on \;\
-  set -g mouse-select-pane on \;\
-  set -g mouse-select-window on \;\
-  display 'Mouse: ON'
+# # Toggle mouse on with ^Z m
+# bind m \
+#   set -g mode-mouse on \;\
+#   set -g mouse-resize-pane on \;\
+#   set -g mouse-select-pane on \;\
+#   set -g mouse-select-window on \;\
+#   display 'Mouse: ON'
 
-# Toggle mouse off with ^Z M
-bind M \
-  set -g mode-mouse off \;\
-  set -g mouse-resize-pane off \;\
-  set -g mouse-select-pane off \;\
-  set -g mouse-select-window off \;\
-  display 'Mouse: OFF'
+# # Toggle mouse off with ^Z M
+# bind M \
+#   set -g mode-mouse off \;\
+#   set -g mouse-resize-pane off \;\
+#   set -g mouse-select-pane off \;\
+#   set -g mouse-select-window off \;\
+#   display 'Mouse: OFF'
 
-unbind +
-bind + \
-  new-window -d -n tmux-zoom 'clear && echo TMUX ZOOM && read' \;\
-  swap-pane -s tmux-zoom.0 \;\
-  select-window -t tmux-zoom
+# unbind +
+# bind + \
+#   new-window -d -n tmux-zoom 'clear && echo TMUX ZOOM && read' \;\
+#   swap-pane -s tmux-zoom.0 \;\
+#   select-window -t tmux-zoom
 
-unbind -
-bind - \
-  last-window \;\
-  swap-pane -s tmux-zoom.0 \;\
-  kill-window -t tmux-zoom
+# unbind -
+# bind - \
+#   last-window \;\
+#   swap-pane -s tmux-zoom.0 \;\
+#   kill-window -t tmux-zoom
