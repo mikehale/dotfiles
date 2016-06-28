@@ -118,8 +118,7 @@
                    helm-semantic-fuzzy-match t
                    helm-imenu-fuzzy-match t)
              (use-package semantic
-               :init   (progn
-                         (semantic-mode 1)))
+               :init   (semantic-mode 1))
              (use-package helm-projectile
                :ensure t
                ;; :pin    melpa-stable
@@ -129,7 +128,9 @@
                         ([remap switch-to-buffer] . helm-mini)
                         ([remap find-file] . helm-find-files)
                         ([remap projectile-switch-project] . helm-projectile-switch-project)
-                        )))
+                        ))
+             (use-package helm-ag :ensure t))
+  
   :bind   (([remap execute-extended-command] . helm-M-x))
   :diminish helm-mode)
 
