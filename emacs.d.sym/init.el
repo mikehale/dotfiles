@@ -192,7 +192,7 @@
                  (use-package rspec-mode :ensure t)
                  (use-package inf-ruby
                    :ensure t
-                   :config (inf-ruby-switch-setup))
+                   :config (inf-ruby-switch-setup)) ;; When you've hit the breakpoint, hit C-x C-q to enable inf-ruby
                  (use-package bundler :ensure t)
                  (setq enh-ruby-bounce-deep-indent t
                        enh-ruby-deep-indent-paren t
