@@ -38,3 +38,5 @@
 #         enabled = 1
 [include]
     path = ~/.gitconfig_private
+[credential]
+	helper = osxkeychain
