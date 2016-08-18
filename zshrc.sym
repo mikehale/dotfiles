@@ -36,4 +36,14 @@ alias cdh="cd ~/projects/heroku"
 eval "$(hub alias -s)"
 alias h=heroku
 alias hs="heroku sudo --reason b"
+alias ic="ion-client"
 alias e="$EDITOR"
+alias be="bundle exec"
+alias ag="ag --color-line-number '1;34'"
+
+cloud() {
+  eval "$(ion-client shell)"
+  cloud "$@"
+}
+
+eval $(docker-machine env)
