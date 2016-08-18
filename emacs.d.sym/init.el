@@ -121,11 +121,24 @@
                         ([remap switch-to-buffer] . helm-mini)
                         ([remap find-file] . helm-find-files)
                         ([remap projectile-switch-project] . helm-projectile-switch-project)
+                        ("C-c p a" . helm-projectile-ag)
+                        ;; ([remap projectile-find-other-file] . helm-projectile-ag)
                         ))
              (use-package helm-ag :ensure t))
-  
+
   :bind   (([remap execute-extended-command] . helm-M-x))
   :diminish helm-mode)
+
+(use-package sh-mode
+  :config (progn(
+                (sh-set-shell "zsh")
+                (setq sh-basic-offset 2
+                      sh-indentation 2)))
+  :interpreter "zsh"
+  :mode        (
+                ("\\.zsh$" . sh-mode)
+                ("zshrc" . sh-mode)
+                ("zprofile" . sh-mode)))
 
 (use-package autorevert                 ; Auto-revert buffers of changed files
   :init (global-auto-revert-mode)
