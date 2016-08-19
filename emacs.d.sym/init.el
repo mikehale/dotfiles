@@ -2,6 +2,7 @@
 ;;
 (setq load-prefer-newer t)    ; Please don't load outdated byte code
 (fset 'yes-or-no-p 'y-or-n-p) ; short answers
+(setq make-backup-files nil)
 
 ;; Formatting
 ;;
