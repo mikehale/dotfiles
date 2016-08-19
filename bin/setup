@@ -3,7 +3,11 @@
 require "fileutils"
 require "pathname"
 
+puts "Sync dotfiles"
 Pathname(__FILE__).dirname.entries.select{ |f| f.extname == ".sym" }.each do |source|
   target = File.expand_path("~/.#{source.basename(".sym")}")
   puts `ln -vnfs #{source.realpath} #{target}`
 end
+
+puts "Set rbenv global version"
+print `rbenv global 2.3.1`
