@@ -1,0 +1,3 @@
+---
+- homebrew: update_homebrew=yes
+  when: ansible_os_family == 'Darwin'

@@ -1,0 +1,21 @@
+#!/bin/bash
+
+set -ueo pipefail
+
+if [[ $(/usr/bin/gcc 2>&1) =~ "no developer tools were found" ]] || [[ ! -x /usr/bin/gcc ]]; then
+  echo "Info   | Install   | xcode"
+  xcode-select --install
+fi
+
+if [[ ! -x /usr/local/bin/brew ]]; then
+  echo "Info   | Install   | homebrew"
+  /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+fi
+
+if [[ ! -x /usr/local/bin/ansible ]]; then
+  echo "Info   | Install   | Ansible"
+  brew update
+  brew install ansible
+fi
+
+/usr/local/bin/ansible-playbook playbook.yml --inventory hosts -v

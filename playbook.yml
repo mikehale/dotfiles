@@ -1,0 +1,46 @@
+---
+- hosts: all
+  tasks:
+    - include: tasks/homebrew.yml
+    - include: tasks/ruby.yml
+    - include: tasks/emacs.yml
+    - include: tasks/heroku.yml
+    - homebrew: name={{item}}
+      when: ansible_os_family == 'Darwin'
+      with_items:
+        - awscli
+        - brew-gem
+        - hub
+        - jq
+        - ossp-uuid
+        - parallel
+        - postgres
+        - pstree
+        - readline
+        - redis
+        - sslscan
+        - the_silver_searcher
+        - tmux
+        - tree
+        - watch
+        - wget
+        - zsh
+    - homebrew_cask: name={{item}}
+      when: ansible_os_family == 'Darwin'
+      with_items:
+        - 1password
+        - carbon-copy-cloner
+        - docker-toolbox
+        - dropbox
+        - google-chrome
+        - google-hangouts
+        - slack
+        - iterm2
+        - launchbar
+        - silverlight
+        - vagrant
+        - virtualbox
+        - virtualbox-extension-pack
+        - yubiswitch
+  vars:
+    - ruby_version: 2.3.1

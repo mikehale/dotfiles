@@ -1,0 +1,2 @@
+- homebrew: name=emacs
+  when: ansible_os_family == 'Darwin'

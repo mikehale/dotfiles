@@ -1,0 +1,14 @@
+---
+- homebrew: name={{item}}
+  when: ansible_os_family == 'Darwin'
+  with_items:
+    - rbenv
+    - ruby-build
+
+- name: install ruby {{ ruby_version }}
+  command: rbenv install {{ ruby_version }} && creates=~/.rbenv/versions/{{ ruby_version }}
+  register: ruby_installed
+
+- name: set default ruby version to {{ ruby_version }}
+  command: rbenv global {{ ruby_version }}
+  when: ruby_installed.rc != 0
