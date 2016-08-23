@@ -17,6 +17,6 @@ rbenv() {
   esac
 }
 
-export PATH=$HOME/.rbenv/shims:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
+export PATH=$HOME/.rbenv/shims:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin
 export NOKOGIRI_USE_SYSTEM_LIBRARIES=1
 export ARCHFLAGS=-Wno-error=unused-command-line-argument-hard-error-in-future
