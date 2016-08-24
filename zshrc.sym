@@ -15,7 +15,7 @@ antigen theme gnzh
 antigen apply
 
 # The following lines were added by compinstall
-zstyle :compinstall filename '/Users/mhale/.zshrc'
+zstyle :compinstall filename "~/.zshrc"
 
 autoload -Uz compinit
 compinit
