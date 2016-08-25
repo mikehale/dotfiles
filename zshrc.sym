@@ -33,13 +33,16 @@ export EDITOR="emacsclient -t"
 # Aliases
 alias cdd="cd ~/projects/dotfiles"
 alias cdh="cd ~/projects/heroku"
-eval "$(hub alias -s)"
 alias h=heroku
 alias hs="heroku sudo --reason b"
 alias ic="ion-client"
 alias e="$EDITOR"
 alias be="bundle exec"
 alias ag="ag --color-line-number '1;34'"
+
+if hash hub 2>/dev/null; then
+  eval "$(hub alias -s)"
+fi
 
 if hash ion-client 2>/dev/null; then
   cloud() {
