@@ -222,6 +222,11 @@
   :defer t
   :init (highlight-numbers-mode))
 
+(use-package web-mode
+  :ensure t
+  :mode   (("\\.erb$" . web-mode))
+  :config (setq web-mode-code-indent-offset 2))
+
 ;; Keybindings
 ;;
 (global-set-key (kbd "M-/") 'dabbrev-expand)
