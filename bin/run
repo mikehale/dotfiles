@@ -4,20 +4,20 @@ set -ueo pipefail
 
 ROOT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )/.." && pwd )"
 
-if [[ $(/usr/bin/gcc 2>&1) =~ "no developer tools were found" ]] || [[ ! -x /usr/bin/gcc ]]; then
+if [[ $(/usr/bin/gcc 2>&1) =~ "no developer tools were found" ]] || ! hash gcc 2>/dev/null; then
   echo "Info   | Install   | xcode"
   xcode-select --install
 fi
 
-if [[ ! -x /usr/local/bin/brew ]]; then
+if ! hash brew 2>/dev/null; then
   echo "Info   | Install   | homebrew"
   /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi
 
-if [[ ! -x /usr/local/bin/ansible ]]; then
+if ! hash ansible 2>/dev/null; then
   echo "Info   | Install   | Ansible"
   brew update
   brew install ansible
 fi
 
-/usr/local/bin/ansible-playbook $ROOT_DIR/ansible/playbook.yml --inventory $ROOT_DIR/ansible/hosts -v
+ansible-playbook $ROOT_DIR/ansible/playbook.yml --inventory $ROOT_DIR/ansible/hosts -v
