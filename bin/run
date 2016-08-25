@@ -2,6 +2,8 @@
 
 set -ueo pipefail
 
+ROOT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )/.." && pwd )"
+
 if [[ $(/usr/bin/gcc 2>&1) =~ "no developer tools were found" ]] || [[ ! -x /usr/bin/gcc ]]; then
   echo "Info   | Install   | xcode"
   xcode-select --install
@@ -18,4 +20,4 @@ if [[ ! -x /usr/local/bin/ansible ]]; then
   brew install ansible
 fi
 
-/usr/local/bin/ansible-playbook playbook.yml --inventory hosts -v
+/usr/local/bin/ansible-playbook $ROOT_DIR/ansible/playbook.yml --inventory $ROOT_DIR/ansible/hosts -v
