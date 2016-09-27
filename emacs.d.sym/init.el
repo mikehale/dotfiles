@@ -73,10 +73,10 @@
 (use-package hydandata-light-theme
   :ensure t)
 
-(use-package smart-mode-line
-  :ensure t
-  :config (progn
-            (sml/setup)))
+;; (use-package smart-mode-line
+;;   :ensure t
+;;   :config (progn
+;;             (sml/setup)))
 
 (use-package compile
   :config (setq compilation-scroll-output t))
