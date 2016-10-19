@@ -5,3 +5,4 @@ tags
 .rbenv-version
 *~
 *.dump
+.byebug_history
