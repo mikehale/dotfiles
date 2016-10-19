@@ -70,13 +70,8 @@
   :ensure t
   :init (exec-path-from-shell-initialize))
 
-(use-package hydandata-light-theme
-  :ensure t)
-
-;; (use-package smart-mode-line
-;;   :ensure t
-;;   :config (progn
-;;             (sml/setup)))
+;; (use-package hydandata-light-theme
+;;   :ensure t)
 
 (use-package compile
   :config (setq compilation-scroll-output t))
@@ -132,9 +127,9 @@
 
 (use-package sh-mode
   :config (progn(
-                (sh-set-shell "zsh")
-                (setq sh-basic-offset 2
-                      sh-indentation 2)))
+                 (sh-set-shell "zsh")
+                 (setq sh-basic-offset 2
+                       sh-indentation 2)))
   :interpreter "zsh"
   :mode        (
                 ("\\.zsh$" . sh-mode)
@@ -144,8 +139,7 @@
 (use-package autorevert                 ; Auto-revert buffers of changed files
   :init (global-auto-revert-mode)
   :config (setq auto-revert-verbose nil ; Shut up, please!
-                ;; Revert Dired buffers, too
-                global-auto-revert-non-file-buffers t))
+                global-auto-revert-non-file-buffers nil))
 
 (use-package recentf
   :init (progn (setq recentf-max-menu-items 25)
@@ -227,6 +221,8 @@
   :mode   (("\\.erb$" . web-mode))
   :config (setq web-mode-code-indent-offset 2))
 
+(use-package elixir-mode :ensure t)
+
 ;; Keybindings
 ;;
 (global-set-key (kbd "M-/") 'dabbrev-expand)
@@ -243,6 +239,20 @@
   (indent-region (point-min) (point-max) nil)
   (untabify (point-min) (point-max)))
 
-;; Local Variables:
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   (quote
+    (elixir-mode web-mode use-package smartparens smart-mode-line rspec-mode obsidian-theme magit hydandata-light-theme highlight-numbers helm-projectile helm-ag flycheck-color-mode-line expand-region exec-path-from-shell enh-ruby-mode bundler ag))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
+ ;; Local Variables:
 ;; flycheck-disabled-checkers: (emacs-lisp-checkdoc)
 ;; End:
