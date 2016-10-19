@@ -40,3 +40,5 @@
     path = ~/.gitconfig_private
 [credential]
 	helper = osxkeychain
+[diff]
+  renames = copy
