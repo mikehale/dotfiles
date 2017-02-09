@@ -6,3 +6,4 @@ tags
 *~
 *.dump
 .byebug_history
+.ruby-version
