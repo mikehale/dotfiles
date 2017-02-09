@@ -202,7 +202,42 @@
                        enh-ruby-hanging-indent-level 2
                        enh-ruby-hanging-paren-deep-indent-level 0
                        enh-ruby-hanging-paren-indent-level 2
-                       enh-ruby-indent-level 2)))
+                       enh-ruby-indent-level 2))
+  :config      (progn
+                 (require 'align)
+
+                 (add-to-list 'align-rules-list
+                              '(ruby-comma-delimiter
+                                (regexp . ",\\(\\s-*\\)[^# \t\n]")
+                                (repeat . t)
+                                (modes  . '(enh-ruby-mode))))
+
+                 (add-to-list 'align-rules-list
+                              '(ruby-hash-literal
+                                (regexp . "\\(\\s-*\\)=>\\s-*[^# \t\n]")
+                                (group 2 3)
+                                (repeat . t)
+                                (modes  . '(enh-ruby-mode))))
+
+                 (add-to-list 'align-rules-list
+                              '(ruby-hash-literal2
+                                (regexp . "[a-z0-9]:\\(\\s-*\\)[^# \t\n]")
+                                (repeat . t)
+                                (modes  . '(enh-ruby-mode))))
+
+                 (add-to-list 'align-rules-list
+                              '(ruby-assignment-literal
+                                (regexp . "\\(\\s-*\\)=\\s-*[^# \t\n]")
+                                (repeat . t)
+                                (modes  . '(enh-ruby-mode))))
+
+                 (add-to-list 'align-rules-list
+                              '(ruby-xmpfilter-mark
+                                (regexp . "\\(\\s-*\\)# => [^#\t\n]")
+                                (repeat . nil)
+                                (modes  . '(enh-ruby-mode))))
+                 ))
+
 
 (use-package expand-region              ; Expand region by semantic units
   :ensure t
@@ -237,7 +272,8 @@
   (interactive)
   (delete-trailing-whitespace)
   (indent-region (point-min) (point-max) nil)
-  (untabify (point-min) (point-max)))
+  (untabify (point-min) (point-max))
+  (align-current))
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -246,13 +282,13 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (elixir-mode web-mode use-package smartparens smart-mode-line rspec-mode obsidian-theme magit hydandata-light-theme highlight-numbers helm-projectile helm-ag flycheck-color-mode-line expand-region exec-path-from-shell enh-ruby-mode bundler ag))))
+    (sql-indent elixir-mode web-mode use-package smartparens smart-mode-line rspec-mode obsidian-theme magit hydandata-light-theme highlight-numbers helm-projectile helm-ag flycheck-color-mode-line expand-region exec-path-from-shell enh-ruby-mode bundler ag))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
- ;; Local Variables:
+;; Local Variables:
 ;; flycheck-disabled-checkers: (emacs-lisp-checkdoc)
 ;; End:
