@@ -1,3 +1,7 @@
+# Ensure clipboard works in os x sierra: https://github.com/tmux/tmux/issues/543#issuecomment-248980734
+set -g default-shell $SHELL
+set -g default-command "reattach-to-user-namespace -l ${SHELL}"
+
 # M-Space as prefix
 set-option -g prefix M-Space
 unbind-key C-b
