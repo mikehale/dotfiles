@@ -10,4 +10,4 @@ Pathname(__FILE__).dirname.entries.select{ |f| f.extname == ".sym" }.each do |so
 end
 
 puts "Set rbenv global version"
-print `rbenv global 2.3.1`
+print `rbenv global 2.4.1`

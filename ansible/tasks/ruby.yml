@@ -6,7 +6,7 @@
     - ruby-build
 
 - name: install ruby {{ ruby_version }}
-  command: rbenv install {{ ruby_version }} && creates=~/.rbenv/versions/{{ ruby_version }}
+  command: rbenv install {{ ruby_version }} creates=~/.rbenv/versions/{{ ruby_version }}
   register: ruby_installed
 
 - name: set default ruby version to {{ ruby_version }}

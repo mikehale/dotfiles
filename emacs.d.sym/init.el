@@ -86,8 +86,7 @@
   :ensure t
   :init   (progn
             (smartparens-global-mode)
-            (show-smartparens-global-mode)
-            (smartparens-global-strict-mode))
+            (show-smartparens-global-mode))
   :diminish smartparens-mode)
 
 (use-package projectile
@@ -272,8 +271,7 @@
   (interactive)
   (delete-trailing-whitespace)
   (indent-region (point-min) (point-max) nil)
-  (untabify (point-min) (point-max))
-  (align-current))
+  (untabify (point-min) (point-max)))
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.

@@ -1,6 +1,8 @@
 - homebrew: name=heroku-toolbelt
   when: ansible_os_family == 'Darwin'
-# heroku plugins:install heroku-sudo`
-# heroku plugins:install heroku-cli-oauth`
+# heroku plugins:install heroku-cli-api`
+# heroku plugins:install heroku-cli-exec`
 # heroku plugins:install heroku-event-log`
 # heroku plugins:install heroku-pg-extras`
+# heroku plugins:install heroku-splunk`
+# heroku plugins:install heroku-sudo`
