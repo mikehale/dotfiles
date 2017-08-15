@@ -10,3 +10,7 @@
     - gitignore
     - gitconfig
     - emacs.d
+- name: Set shell
+  command: dscl . -create /Users/$USER UserShell /usr/local/bin/zsh
+  become: true
+  become_user: root
