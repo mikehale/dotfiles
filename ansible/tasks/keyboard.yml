@@ -1,0 +1,4 @@
+- file: path=~/Library/KeyBindings state=directory
+- copy:
+    src: ~/projects/dotfiles/files/DefaultKeyBinding.dict
+    dest: ~/Library/KeyBindings/DefaultKeyBinding.dict
