@@ -1,2 +1,12 @@
 ---
-
+- file:
+    src: '~/projects/dotfiles/{{ item }}.sym'
+    dest: '~/.{{ item }}'
+    state: link
+  with_items:
+    - zshrc
+    - zprofile
+    - tmux.conf
+    - gitignore
+    - gitconfig
+    - emacs.d
