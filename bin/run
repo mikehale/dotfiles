@@ -20,4 +20,4 @@ if ! hash ansible 2>/dev/null; then
   brew install ansible
 fi
 
-ansible-playbook $ROOT_DIR/ansible/playbook.yml --inventory $ROOT_DIR/ansible/hosts -v
+ansible-playbook $ROOT_DIR/ansible/playbook.yml --inventory $ROOT_DIR/ansible/hosts -v --ask-become-pass
