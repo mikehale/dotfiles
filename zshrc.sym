@@ -44,15 +44,15 @@ if hash hub 2>/dev/null; then
   eval "$(hub alias -s)"
 fi
 
-if hash ion-client 2>/dev/null; then
-  cloud() {
-    eval "$(ion-client shell)"
-    cloud "$@"
-  }
-fi
+# if hash ion-client 2>/dev/null; then
+#   cloud() {
+#     eval "$(ion-client shell)"
+#     cloud "$@"
+#   }
+# fi
 
-if hash docker-machine 2>/dev/null; then
-  if docker-machine status default | grep -qi 'running'; then
-    eval $(docker-machine env)
-  fi
-fi
+# if hash docker-machine 2>/dev/null; then
+#   if docker-machine status default | grep -qi 'running'; then
+#     eval $(docker-machine env)
+#   fi
+# fi
