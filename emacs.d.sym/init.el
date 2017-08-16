@@ -1,3 +1,8 @@
+;; Environment
+
+(setenv "LANG" "en_US.UTF-8")
+(setenv "LC_CTYPE" "en_US.UTF-8")
+
 ;; Misc
 ;;
 (setq load-prefer-newer t)    ; Please don't load outdated byte code
