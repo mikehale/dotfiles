@@ -27,6 +27,8 @@
         - watch
         - wget
         - zsh
+        - reattach-to-user-namespace
+        - ispell
     - homebrew_cask: name={{item}}
       when: ansible_os_family == 'Darwin'
       with_items:
