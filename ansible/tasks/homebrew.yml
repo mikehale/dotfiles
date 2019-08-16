@@ -1,5 +1,3 @@
 ---
 - homebrew: update_homebrew=yes
   when: ansible_os_family == 'Darwin'
-- homebrew_tap:
-    name: caskroom/homebrew-drivers
