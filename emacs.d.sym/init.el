@@ -3,6 +3,8 @@
 (setenv "LANG" "en_US.UTF-8")
 (setenv "LC_CTYPE" "en_US.UTF-8")
 
+(add-hook 'compilation-filter-hook 'inf-ruby-auto-enter)
+
 ;; Misc
 ;;
 (setq load-prefer-newer t)    ; Please don't load outdated byte code
@@ -62,6 +64,13 @@
 
 ;; Packages
 ;;
+
+;; (use-package auto-package-update
+;;    :ensure t
+;;    :config
+;;    (setq auto-package-update-delete-old-versions t
+;;          auto-package-update-interval 1)
+;;    (auto-package-update-maybe))
 
 (use-package server
   :defer t
@@ -206,7 +215,8 @@
                        enh-ruby-hanging-indent-level 2
                        enh-ruby-hanging-paren-deep-indent-level 0
                        enh-ruby-hanging-paren-indent-level 2
-                       enh-ruby-indent-level 2))
+                       enh-ruby-indent-level 2
+                       enh-ruby-add-encoding-comment-on-save nil))
   :config      (progn
                  (require 'align)
 
@@ -261,6 +271,15 @@
   :config (setq web-mode-code-indent-offset 2))
 
 (use-package elixir-mode :ensure t)
+(use-package go-mode :ensure t)
+
+(use-package markdown-mode
+  :ensure t
+  :commands (markdown-mode gfm-mode)
+  :mode (("README\\.md\\'" . gfm-mode)
+         ("\\.md\\'" . markdown-mode)
+         ("\\.markdown\\'" . markdown-mode))
+  :init (setq markdown-command "multimarkdown"))
 
 ;; Keybindings
 ;;
@@ -283,9 +302,10 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(org-agenda-files (quote ("~/Dropbox/org/inbox.org")))
  '(package-selected-packages
    (quote
-    (sql-indent elixir-mode web-mode use-package smartparens smart-mode-line rspec-mode obsidian-theme magit hydandata-light-theme highlight-numbers helm-projectile helm-ag flycheck-color-mode-line expand-region exec-path-from-shell enh-ruby-mode bundler ag))))
+    (auto-package-update flycheck go-mode markdown-mode sql-indent elixir-mode web-mode use-package smartparens smart-mode-line rspec-mode obsidian-theme magit hydandata-light-theme highlight-numbers helm-projectile helm-ag flycheck-color-mode-line expand-region exec-path-from-shell enh-ruby-mode bundler ag))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

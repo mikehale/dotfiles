@@ -16,6 +16,7 @@
         wdiff = diff --color-words
         m = merge --no-ff
         cleanbranches = !~/.bin/git_clean_branches.sh
+        hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short -10
 [color]
         branch = auto
         diff = auto

@@ -11,6 +11,7 @@
       when: ansible_os_family == 'Darwin'
       with_items:
         - awscli
+        - golang
         - brew-gem
         - hub
         - jq

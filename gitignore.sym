@@ -7,3 +7,6 @@ tags
 *.dump
 .byebug_history
 .ruby-version
+package-lock.json
+custom_plan.rb
+zeus.json
