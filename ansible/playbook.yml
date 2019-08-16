@@ -11,6 +11,9 @@
     - homebrew:
       when: ansible_os_family == 'Darwin'
       name: "awscli, golang, brew-gem, hub, jq, ossp-uuid, parallel, postgres, pstree, readline, redis, sslscan, the_silver_searcher, tmux, tree, watch, wget, zsh, reattach-to-user-namespace, ispell"
+    - command: brew services list | grep -q 'emacs.*stopped' && brew services start emacs
+    - command: brew services list | grep -q 'redis.*stopped' && brew services start redis
+    - command: brew services list | grep -q 'postgresql.*stopped' && brew services start postgresql
     - homebrew_cask: name={{item}}
       when: ansible_os_family == 'Darwin'
       with_items:
