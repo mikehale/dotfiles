@@ -27,6 +27,6 @@
         - vagrant
         - virtualbox
         - virtualbox-extension-pack
-        - yubiswitch
+        - pallotron-yubiswitch
   vars:
     - ruby_version: 2.6.3
