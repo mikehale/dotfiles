@@ -18,15 +18,10 @@
         - carbon-copy-cloner
         - docker
         - dropbox
-        - google-chrome
-        - google-hangouts
         - slack
         - iterm2
         - launchbar
         - silverlight
-        - vagrant
-        - virtualbox
-        - virtualbox-extension-pack
         - pallotron-yubiswitch
   vars:
     - ruby_version: 2.6.3
