@@ -16,7 +16,7 @@
       with_items:
         - 1password
         - carbon-copy-cloner
-        - docker-toolbox
+        - docker
         - dropbox
         - google-chrome
         - google-hangouts
