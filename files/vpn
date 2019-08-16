@@ -1,0 +1,87 @@
+#!/usr/bin/env ruby
+
+def server
+  case Time.now.zone
+  when 'EDT', 'EST'
+    'aloha-east'
+  when 'PDT', 'PST'
+    'aloha-west'
+  else
+    'aloha-east'
+  end
+end
+
+def one_pass_set_session
+  ENV["OP_SESSION_my"] = File.read(File.expand_path('~/.op.session.private')).chomp
+end
+
+def one_pass_signin
+  one_pass_set_session
+
+  require 'open3'
+  _stdout, _stderr, status = Open3.capture3('op', 'list', 'items')
+  unless status.success?
+    # $stderr.print "1Password login:"
+    # password = $stdin.gets
+    # stdout, stderr, status = Open3.capture3('op', 'signin', 'my', '--output=raw', stdin_data: password)
+    # p stdout
+    # p stderr
+    # p status
+    # Open3.popen3('op', 'signin', 'my', '--output=raw') do |stdin, stdout, stderr, wait_thr|
+    #   p stdout
+    #   p stderr
+    #   p wait_thr.value
+    # end
+
+    `op signin my --output=raw > ~/.op.session.private`
+    one_pass_set_session
+  end
+end
+
+def login_details
+  require 'json'
+  one_pass_signin
+
+  fields = JSON.parse(`op get item 'Salesforce (Laptop/Aloha)'`).dig('details', 'fields')
+  username = fields.find { |f| f['id'] == 'username' }.dig('value')
+  password = fields.find { |f| f['id'] == 'password' }.dig('value')
+  totp = `op get totp 'Salesforce (Laptop/Aloha)'`.chomp
+
+  [username, password, totp]
+end
+
+def connect
+  username, password, totp = login_details
+
+  exec 'expect', '-c', <<-EXPECT
+  set timeout -1
+  spawn /opt/cisco/anyconnect/bin/vpn connect #{server}
+
+  expect "*Username:?"
+  send -- "#{username}\\r"
+
+  expect "*Passcode:?"
+  send -- "#{password}\\r"
+
+  expect "*Answer:?"
+  send -- "#{totp}\\r"
+
+  expect "accept?"
+  send -- "y\\r"
+
+  expect eof
+  EXPECT
+end
+
+def disconnect
+  exec "/opt/cisco/anyconnect/bin/vpn", "disconnect"
+end
+
+case ARGV[0]
+when 'connect', 'c'
+  connect
+when 'disconnect', 'd'
+  disconnect
+else
+  connect
+end

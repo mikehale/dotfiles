@@ -1,0 +1,3 @@
+- copy:
+    src: ~/projects/dotfiles/files/vpn
+    dest: /usr/local/bin/vpn
