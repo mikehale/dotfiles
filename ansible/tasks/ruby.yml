@@ -1,9 +1,7 @@
 ---
-- homebrew: name={{item}}
+- homebrew:
   when: ansible_os_family == 'Darwin'
-  with_items:
-    - rbenv
-    - ruby-build
+  name: "rbenv, ruby-build"
 
 - name: install ruby {{ ruby_version }}
   command: rbenv install {{ ruby_version }} creates=~/.rbenv/versions/{{ ruby_version }}

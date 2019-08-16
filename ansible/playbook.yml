@@ -8,29 +8,9 @@
     - include: tasks/emacs.yml
     - include: tasks/heroku.yml
     - include: tasks/vpn.yml
-    - homebrew: name={{item}}
+    - homebrew:
       when: ansible_os_family == 'Darwin'
-      with_items:
-        - awscli
-        - golang
-        - brew-gem
-        - hub
-        - jq
-        - ossp-uuid
-        - parallel
-        - postgres
-        - pstree
-        - readline
-        - redis
-        - sslscan
-        - the_silver_searcher
-        - tmux
-        - tree
-        - watch
-        - wget
-        - zsh
-        - reattach-to-user-namespace
-        - ispell
+      name: "awscli, golang, brew-gem, hub, jq, ossp-uuid, parallel, postgres, pstree, readline, redis, sslscan, the_silver_searcher, tmux, tree, watch, wget, zsh, reattach-to-user-namespace, ispell"
     - homebrew_cask: name={{item}}
       when: ansible_os_family == 'Darwin'
       with_items:
