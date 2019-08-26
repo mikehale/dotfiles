@@ -4,6 +4,8 @@
     dest: '~/.{{ item }}'
     state: link
   with_items:
+    - zshenv
+    - zshenv.private
     - zshrc
     - zprofile
     - tmux.conf

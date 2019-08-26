@@ -60,10 +60,3 @@ if hash ion-client 2>/dev/null; then
     cloud "$@"
   }
 fi
-
-# heroku autocomplete setup
-#CLI_ENGINE_AC_ZSH_SETUP_PATH=/Users/mhale/Library/Caches/heroku/completions/zsh_setup && test -f $CLI_ENGINE_AC_ZSH_SETUP_PATH && source $CLI_ENGINE_AC_ZSH_SETUP_PATH;
-
-# PG10
-#export PATH="/usr/local/opt/postgresql@10/bin:$PATH"
-

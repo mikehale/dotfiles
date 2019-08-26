@@ -10,3 +10,7 @@
 - name: set default ruby version to {{ ruby_version }}
   command: rbenv global {{ ruby_version }}
   when: ruby_installed.rc != 0
+
+- gem:
+    name: solargraph
+    state: present
