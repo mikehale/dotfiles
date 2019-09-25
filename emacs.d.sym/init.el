@@ -198,7 +198,7 @@
            ([remap find-file] . helm-find-files)
            ([remap projectile-switch-project] . helm-projectile-switch-project)
            ([remap projectile-ag] . helm-projectile-ag)
-           ("C-c p m" . helm-imenu)
+           ([remap projectile-commander] . helm-imenu)
            ))
 (use-package helm-xref
   :pin "melpa"
@@ -209,12 +209,31 @@
 (use-package lsp-mode
   :diminish lsp-mode
   :hook ((go-mode . lsp-deferred)
-         (enh-ruby-mode . lsp-deferred))
+         (enh-ruby-mode . lsp-deferred)
+         (lsp-after-open . disable-flymake-mode))
   :custom
   (lsp-auto-guess-root t)
   (lsp-signature-render-all t)
   (lsp-eldoc-render-all t)
-  :commands lsp-deferred)
+  (lsp-prefer-flymake nil)
+  :commands lsp-deferred
+  :config
+  (defun disable-flymake-mode ()
+    (flymake-mode -1)))
+
+(use-package lsp-ui
+  :commands lsp-ui-mode
+  :custom
+  (lsp-ui-sideline-enable nil)
+  (lsp-ui-peek-enable nil)
+  (lsp-ui-imenu-enable nil)
+  (lsp-ui-doc-enable nil)
+  (lsp-ui-flycheck-enable t)
+  :config
+  (require 'lsp-ui-flycheck)
+  (with-eval-after-load 'lsp-mode
+  (add-hook 'lsp-after-open-hook (lambda () (lsp-ui-flycheck-enable 1))))
+  )
 
 (use-package company-lsp
   :bind (("M-RET" . company-complete))
@@ -230,7 +249,11 @@
 (use-package ag)
 (use-package yaml-mode)
 (use-package yasnippet :diminish yas-minor-mode)
-(use-package flymake :diminish flymake-mode)
+(use-package flycheck)
+(use-package flycheck-color-mode-line
+  :config
+  (set-face-attribute 'flycheck-color-mode-line-error-face nil :background "red2")
+  :hook ((flycheck-mode . flycheck-color-mode-line-mode)))
 
 (use-package recentf
   :custom
