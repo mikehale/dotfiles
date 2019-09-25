@@ -57,10 +57,10 @@ set -g status-left-length 30
 set -g status-left '#[fg=green](#S) #H#[default] ⋮'
 set -g status-right-length 71
 set -g status-right "#[fg=blue]#(date +'%%Y-%%m-%%dT%%H:%%M:%%S %%Z') #[fg=colour93]#(TZ=US/Pacific date +'%%Y-%%m-%%dT%%H:%%M:%%S %%Z') #[fg=green]#(TZ=UTC date +'%%Y-%%m-%%dT%%H:%%M:%%S %%Z')"
-set -g window-status-current-bg red
-set -g pane-border-fg default
-set -g pane-active-border-fg colour33
-set -g pane-active-border-bg colour33
+
+set -g window-status-current-style bg=red
+set -g pane-border-style fg=default
+set -g pane-active-border-style fg=colour33,bg=colour33
 set -g default-terminal "xterm-256color"
 
 # open a man page in new window

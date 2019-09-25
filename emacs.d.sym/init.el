@@ -1,10 +1,19 @@
+;; Things to try:
+;; company-quickhelp
+;; hydra
+
+
+;; Code navigation:
+;; M-? xref-find-references
+;; M-. xref-find-definitions
+;; M-, xref-pop-marker-stack
+
 ;; Environment
 
-(setenv "LANG" "en_US.UTF-8")
-(setenv "LC_CTYPE" "en_US.UTF-8")
-
-(setq load-prefer-newer t)
-
+(setq custom-file
+      (expand-file-name (locate-user-emacs-file "custom-settings.el")))
+(when (file-exists-p custom-file)
+  (load custom-file t))
 
 ;; Formatting
 ;;
@@ -18,19 +27,23 @@
 
 ;; Display
 ;;
-(dolist (mode '(tool-bar-mode))
+(dolist (mode '(menu-bar-mode tool-bar-mode scroll-bar-mode blink-cursor-mode))
   (when (fboundp mode) (funcall mode -1)))
 
-;; (dolist (mode '(column-number-mode))
-;;   (when (fboundp mode) (funcall mode 1)))
+(dolist (mode '(column-number-mode))
+  (when (fboundp mode) (funcall mode 1)))
 
 (setq inhibit-startup-screen t)
+
+(add-to-list 'default-frame-alist '(fullscreen . fullboth))
+(setq visual-line-fringe-indicators '(left-curly-arrow right-curly-arrow))
+;; (setq line-move-visual nil)
 
 ;; Misc
 ;;
 (setq load-prefer-newer t)    ; Please don't load outdated byte code
 (fset 'yes-or-no-p 'y-or-n-p) ; short answers
-(setq make-backup-files nil)
+(setq make-backup-files nil)  ; no backups
 
 ;; Bootstrap use-package
 ;;
@@ -52,8 +65,10 @@
   (package-install 'use-package))
 
 (require 'use-package-ensure)
-(setq use-package-always-ensure t)
-(setq use-package-always-pin "melpa-stable")
+(setq use-package-always-ensure t
+      use-package-always-pin "melpa-stable"
+      use-package-verbose t
+      use-package-compute-statistics nil)
 
 (eval-when-compile
   (require 'use-package))
@@ -61,37 +76,173 @@
 ;; Packages
 ;;
 (use-package auto-package-update
+  :custom
+  (auto-package-update-delete-old-versions t)
+  (auto-package-update-hide-results t)
   :config
-  (setq auto-package-update-delete-old-versions t)
-  (setq auto-package-update-hide-results t)
   (auto-package-update-maybe))
 
 (use-package exec-path-from-shell
+  :custom
+  (exec-path-from-shell-variables '("MANPATH" "PATH" "exec-path" "GO111MODULE" "GOPATH" "GOBIN" "LANG" "LC_CTYPE"))
+  (exec-path-from-shell-arguments nil)
   :config
-  (dolist (var '("GO111MODULE"
-                 "GOPATH"
-                 "GOBIN"
-                 ))
-    (add-to-list 'exec-path-from-shell-variables var))
-  (setq exec-path-from-shell-arguments nil)
   (exec-path-from-shell-initialize))
-(getenv "PATH")
 
 (use-package diminish)
+(use-package bind-key)
 
+;; TODO: make sure this is still working
 (use-package server
-  :defer t
+  :disabled
   :init (server-mode)
   :diminish server-buffer-clients)
+
+(use-package eldoc :diminish eldoc-mode)
 
 (use-package magit
   :bind   ("C-x g" . magit-status))
 
+(use-package dap-mode
+  :pin "melpa"
+  :config
+  (dap-mode t)
+  (dap-ui-mode t)
+  ;; enables mouse hover support
+  (dap-tooltip-mode t)
+  ;; use tooltips for mouse hover
+  ;; if it is not enabled `dap-mode' will use the minibuffer.
+  (tooltip-mode t))
+
+;;;
+
+;; (defun my/window-visible (b-name)
+;;   "Return whether B-NAME is visible."
+;;   (-> (-compose 'buffer-name 'window-buffer)
+;;       (-map (window-list))
+;;       (-contains? b-name)))
+
+;; (defun my/show-debug-windows (session)
+;;   "Show debug windows."
+;;   (let ((lsp--cur-workspace (dap--debug-session-workspace session)))
+;;     (save-excursion
+;;       ;; display locals
+;;       (unless (my/window-visible dap-ui--locals-buffer)
+;;         (dap-ui-locals))
+;;       ;; display sessions
+;;       (unless (my/window-visible dap-ui--sessions-buffer)
+;;         (dap-ui-sessions)))))
+
+;; (add-hook 'dap-stopped-hook 'my/show-debug-windows)
+
+;; (defun my/hide-debug-windows (session)
+;;   "Hide debug windows when all debug sessions are dead."
+;;   (unless (-filter 'dap--session-running (dap--get-sessions))
+;;     (and (get-buffer dap-ui--sessions-buffer)
+;;          (kill-buffer dap-ui--sessions-buffer))
+;;     (and (get-buffer dap-ui--locals-buffer)
+;;          (kill-buffer dap-ui--locals-buffer))))
+
+;; (add-hook 'dap-terminated-hook 'my/hide-debug-windows)
+
+;;;
+
 (use-package smartparens
-  :config   (smartparens-global-strict-mode)
+  :hook ((prog-mode . smartparens-mode)
+         (prog-mode . show-smartparens-mode)
+         (emacs-lisp-mode . smartparens-strict-mode))
+  :config
+  (require 'smartparens-config)
   :diminish smartparens-mode)
 
+(use-package hl-line
+  :config (global-hl-line-mode t))
+(use-package hl-todo
+  :config (global-hl-todo-mode t))
+(use-package highlight-numbers
+  :hook ((prog-mode . highlight-numbers-mode)))
+
+(use-package highlight-symbol
+  :custom
+  (highlight-symbol-on-navigation-p t) ;Highlight immediately after navigation
+  (highlight-symbol-idle-delay 0.1) ; Highlight quickly
+  :config
+  ;;Enable symbol navigation using M-n and M-p
+  (dolist (hook '(highlight-symbol-nav-mode highlight-symbol-mode))
+    (add-hook 'prog-mode-hook hook))
+  :diminish highlight-symbol-mode)
+
+(use-package expand-region
+  :bind ("C-=" . er/expand-region))
+
+(use-package projectile
+  :custom
+  (projectile-completion-system 'helm)
+  :config
+  (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
+  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+  (projectile-mode +1)
+  :diminish projectile-mode)
+
+(use-package helm
+  :bind ([remap execute-extended-command] . helm-M-x)
+  :diminish helm-mode)
+(use-package helm-ag
+  :custom
+  (helm-ag-insert-at-point 'symbol))
+(use-package helm-projectile
+  :config (helm-projectile-on)
+  :bind   (
+           ("C-c h" . helm-projectile) ;; also C-c p f
+           ([remap switch-to-buffer] . helm-mini)
+           ([remap find-file] . helm-find-files)
+           ([remap projectile-switch-project] . helm-projectile-switch-project)
+           ([remap projectile-ag] . helm-projectile-ag)
+           ("C-c p m" . helm-imenu)
+           ))
+(use-package helm-xref
+  :pin "melpa"
+  :config
+  ;; Use helm-xref as the default xref show function.
+  (setq-default xref-show-xrefs-function 'helm-xref-show-xrefs))
+
+(use-package lsp-mode
+  :diminish lsp-mode
+  :hook ((go-mode . lsp-deferred)
+         (enh-ruby-mode . lsp-deferred))
+  :custom
+  (lsp-auto-guess-root t)
+  (lsp-signature-render-all t)
+  (lsp-eldoc-render-all t)
+  :commands lsp-deferred)
+
+(use-package company-lsp
+  :bind (("M-RET" . company-complete))
+  :commands company-lsp
+  :diminish company-mode)
+
+;; For some reason this is not working. It seems related to not being able to find the current workspace
+;; (use-package helm-lsp
+;;   :commands helm-lsp-workspace-symbol
+;;   :pin "melpa"
+;;   :bind ([remap xref-find-apropos] . helm-lsp-workspace-symbol))
+
+(use-package ag)
+(use-package yaml-mode)
+(use-package yasnippet :diminish yas-minor-mode)
+(use-package flymake :diminish flymake-mode)
+
+(use-package recentf
+  :custom
+  (recentf-max-menu-items 25)
+  :init (recentf-mode t))
+
+(use-package which-key
+  :diminish which-key-mode
+  :config (which-key-mode))
+
 (use-package enh-ruby-mode
+  :after (lsp-mode dap-mode)
   :defines     (end-ruby-deep-indent-paren end-ruby-deep-arglist)
   :interpreter "ruby"
   :mode        (("\\.rb$" . enh-ruby-mode)
@@ -102,20 +253,23 @@
                 ("Guardfile" . enh-ruby-mode)
                 ("Vagrantfile" . enh-ruby-mode)
                 ("\\.ru" . enh-ruby-mode))
-  :init        (progn
-                 (use-package rspec-mode)
-                 (use-package inf-ruby :config (inf-ruby-switch-setup)) ;; When you've hit the breakpoint, hit C-x C-q to enable inf-ruby
-                 (use-package bundler)
-                 (setq enh-ruby-bounce-deep-indent t
-                       enh-ruby-deep-indent-paren t
-                       enh-ruby-hanging-brace-deep-indent-level 1
-                       enh-ruby-hanging-brace-indent-level 2
-                       enh-ruby-hanging-indent-level 2
-                       enh-ruby-hanging-paren-deep-indent-level 0
-                       enh-ruby-hanging-paren-indent-level 2
-                       enh-ruby-indent-level 2
-                       enh-ruby-add-encoding-comment-on-save nil))
+  :custom
+  (enh-ruby-bounce-deep-indent t)
+  (enh-ruby-deep-indent-paren t)
+  (enh-ruby-hanging-brace-deep-indent-level 1)
+  (enh-ruby-hanging-brace-indent-level 2)
+  (enh-ruby-hanging-indent-level 2)
+  (enh-ruby-hanging-paren-deep-indent-level 0)
+  (enh-ruby-hanging-paren-indent-level 2)
+  (enh-ruby-indent-level 2)
+  (enh-ruby-add-encoding-comment-on-save nil)
+
+  ;; TODO: can this align stuff be removed now that I'm using lsp-mode?
   :config      (progn
+                 (use-package bundler)
+                 ;; When you've hit the breakpoint, hit C-x C-q to enable inf-ruby
+                 (use-package inf-ruby :config (inf-ruby-switch-setup))
+                 (use-package rspec-mode)
                  (require 'align)
 
                  (add-to-list 'align-rules-list
@@ -150,60 +304,20 @@
                                 (modes  . '(enh-ruby-mode))))
                  ))
 
-(use-package go-mode)
-
-(use-package hl-line                    ; Highlight the current line
-  :init (global-hl-line-mode 1))
-
-(use-package highlight-numbers          ; Fontify number literals
-  :defer t
-  :init (highlight-numbers-mode))
-
-(use-package projectile
-  :config (projectile-mode)
-  :diminish projectile-mode)
-
-(use-package helm-ag)
-(use-package helm-projectile
-  :config (helm-projectile-on)
-  :bind   (
-           ("C-c h" . helm-projectile)
-           ([remap switch-to-buffer] . helm-mini)
-           ([remap find-file] . helm-find-files)
-           ("C-c p p" . helm-projectile-switch-project)
-           ("C-c p a" . helm-projectile-ag)))
-(use-package helm
-  :bind ([remap execute-extended-command] . helm-M-x)
-  :diminish helm-mode)
-
-(use-package lsp-mode
-  :diminish lsp-mode
-  :hook (
-         (go-mode . lsp)
-         (enh-ruby-mode . lsp))
-  :commands lsp)
-
-(use-package lsp-ui :commands lsp-ui-mode)
-(add-to-list 'company-lsp-filter-candidates '(gopls . nil))
-(use-package company-lsp :commands company-lsp)
-(use-package helm-lsp :commands helm-lsp-workspace-symbol :pin "melpa")
-(use-package lsp-treemacs :commands lsp-treemacs-errors-list :pin "melpa")
-(use-package dap-mode)
-
-(use-package ag)
-(use-package yaml-mode)
-(use-package yasnippet)
-
-(use-package recentf
-  :init (progn (setq recentf-max-menu-items 25)
-               (recentf-mode t)))
-
-(use-package which-key
-  :diminish which-key-mode
-  :config (which-key-mode))
+(use-package go-mode
+  ;; :hook ((before-save . go-mode-before-save-fn))
+  :after (lsp-mode dap-mode)
+  :config
+  (defun go-mode-before-save-fn ()
+    (when (eq major-mode 'go-mode)
+      (lsp-format-buffer)
+      (lsp-organize-imports)))
+  (require 'dap-go)
+  (dap-go-setup))
 
 ;; Functions
 ;;
+;; TODO first, use lsp-format-buffer, lsp-organize-imports, then skip the whitespace cleanup for go-mod
 (defun cleanup-buffer()
   "indent and clean buffer"
   (interactive)
@@ -220,26 +334,11 @@
 
 ;; Window management
 ;;
-(progn
-  (global-set-key (kbd "<up>") 'shrink-window)
-  (global-set-key (kbd "<down>") 'enlarge-window)
-  (global-set-key (kbd "<left>") 'shrink-window-horizontally)
-  (global-set-key (kbd "<right>") 'enlarge-window-horizontally))
+(global-set-key (kbd "<up>") 'shrink-window)
+(global-set-key (kbd "<down>") 'enlarge-window)
+(global-set-key (kbd "<left>") 'shrink-window-horizontally)
+(global-set-key (kbd "<right>") 'enlarge-window-horizontally)
 
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   (quote
-    (helm-ag helm-projectile bundler inf-ruby rspec-mode enh-ruby-mode dap-mode lsp-treemacs helm helm-lsp company-lsp lsp-ui projectile which-key abbrev yasnippet yaml-mode go-mode exec-path-from-shell use-package-ensure-system-package ag sql-indent spinner lsp-mode use-package smartparens magit diminish auto-package-update))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
 ;; Local Variables:
 ;; flycheck-disabled-checkers: (emacs-lisp-checkdoc)
 ;; End:
