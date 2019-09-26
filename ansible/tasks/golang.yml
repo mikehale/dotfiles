@@ -3,10 +3,10 @@
   when: ansible_os_family == 'Darwin'
   name: "golang"
 
-- shell: "go get golang.org/x/tools/gopls@latest"
+- shell: "GO111MODULE=off go get golang.org/x/tools/gopls@latest"
   args:
     creates: "{{ lookup('env','GOBIN') }}/gopls"
 
-- shell: "go get github.com/go-delve/delve/cmd/dlv"
+- shell: "GO111MODULE=off go get github.com/go-delve/delve/cmd/dlv"
   args:
     creates: "{{ lookup('env','GOBIN') }}/dlv"
