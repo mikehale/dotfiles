@@ -6,4 +6,10 @@
 /emacs.d.sym/projectile-bookmarks.eld
 /emacs.d.sym/network-security.data
 /emacs.d.sym/projectile.cache
+/emacs.d.sym/.extension/
+/emacs.d.sym/.last-package-update-day
+/emacs.d.sym/.lsp-session-v1
+/emacs.d.sym/custom-settings.el
+/emacs.d.sym/transient/
+
 /zshenv.private.sym
