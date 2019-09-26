@@ -19,6 +19,7 @@
       when: ansible_os_family == 'Darwin'
       with_items:
         - 1password
+        - 1password-cli
         - carbon-copy-cloner
         - docker
         - dropbox
