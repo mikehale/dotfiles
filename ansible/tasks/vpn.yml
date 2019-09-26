@@ -1,3 +1,9 @@
+- name: ensure file exists
+  copy:
+    content: ""
+    dest: ~/.op.session.private
+    force: no
 - copy:
     src: ~/projects/dotfiles/files/vpn
     dest: /usr/local/bin/vpn
+    mode: 0755
