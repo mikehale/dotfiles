@@ -1,5 +1,11 @@
 ---
 - file:
+    src: '~/Dropbox/privatedotfiles/{{ item }}.sym'
+    dest: '~/projects/dotfiles/{{ item }}.sym'
+    state: link
+  with_items:
+    - zshenv.private
+- file:
     src: '~/projects/dotfiles/{{ item }}.sym'
     dest: '~/.{{ item }}'
     state: link
