@@ -185,6 +185,9 @@
   :diminish projectile-mode)
 
 (use-package helm
+  :config
+  (require 'helm-config)
+  (helm-mode 1)
   :bind ([remap execute-extended-command] . helm-M-x)
   :diminish helm-mode)
 (use-package helm-ag
