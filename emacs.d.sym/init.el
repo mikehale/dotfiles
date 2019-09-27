@@ -350,13 +350,16 @@
 
 ;; Functions
 ;;
-;; TODO first, use lsp-format-buffer, lsp-organize-imports, then skip the whitespace cleanup for go-mod
 (defun cleanup-buffer()
   "indent and clean buffer"
   (interactive)
-  (delete-trailing-whitespace)
-  (indent-region (point-min) (point-max) nil)
-  (untabify (point-min) (point-max)))
+  (when (eq major-mode 'go-mode)
+    (lsp-format-buffer)
+    (lsp-organize-imports))
+  (when (not (eq major-mode 'go-mode))
+    (delete-trailing-whitespace)
+    (indent-region (point-min) (point-max) nil)
+    (untabify (point-min) (point-max))))
 
 ;; Keybindings
 ;;
