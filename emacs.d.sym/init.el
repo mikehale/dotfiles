@@ -49,9 +49,8 @@
 ;;
 
 ;; https://debbugs.gnu.org/cgi/bugreport.cgi?bug=34341
-(unless (version<= emacs-version "26.1")
-  (if (version<= emacs-version "26.2")
-      (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")))
+(if (and (version<= emacs-version "26.2") (string-equal system-type "darwin"))
+    (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3"))
 
 (require 'package)
 (setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
