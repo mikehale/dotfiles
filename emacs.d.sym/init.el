@@ -332,21 +332,23 @@
                  ))
 
 (use-package go-mode
-  :bind (:map go-mode-map
-              ("C-c C-c" . go-run-buffer))
   :hook ((before-save . go-mode-before-save-fn))
   :after (lsp-mode dap-mode)
   :config
-  (defun go-run-buffer()
-    (interactive)
-    (save-buffer)
-    (shell-command (concat "go run " (buffer-name))))
   (defun go-mode-before-save-fn ()
     (when (eq major-mode 'go-mode)
       (lsp-format-buffer)
       (lsp-organize-imports)))
   (require 'dap-go)
   (dap-go-setup))
+
+(use-package gotest
+  :bind (:map go-mode-map
+              ("C-c , v" . go-test-current-file)
+              ("C-c , s" . go-test-current-test)
+              ("C-c , a" . go-test-current-project)
+              ("C-c , b" . go-test-current-benchmark)
+              ("C-c x" . go-run)))
 
 ;; Functions
 ;;

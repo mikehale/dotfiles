@@ -11,5 +11,6 @@
 /emacs.d.sym/.lsp-session-v1
 /emacs.d.sym/custom-settings.el
 /emacs.d.sym/transient/
+/emacs.d.sym/.dap-breakpoints
 
 /zshenv.private.sym
