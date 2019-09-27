@@ -237,7 +237,7 @@
   :config
   (require 'lsp-ui-flycheck)
   (with-eval-after-load 'lsp-mode
-  (add-hook 'lsp-after-open-hook (lambda () (lsp-ui-flycheck-enable 1))))
+    (add-hook 'lsp-after-open-hook (lambda () (lsp-ui-flycheck-enable 1))))
   )
 
 (use-package company-lsp
