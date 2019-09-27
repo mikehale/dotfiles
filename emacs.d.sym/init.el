@@ -332,9 +332,15 @@
                  ))
 
 (use-package go-mode
-  ;; :hook ((before-save . go-mode-before-save-fn))
+  :bind (:map go-mode-map
+              ("C-c C-c" . go-run-buffer))
+  :hook ((before-save . go-mode-before-save-fn))
   :after (lsp-mode dap-mode)
   :config
+  (defun go-run-buffer()
+    (interactive)
+    (save-buffer)
+    (shell-command (concat "go run " (buffer-name))))
   (defun go-mode-before-save-fn ()
     (when (eq major-mode 'go-mode)
       (lsp-format-buffer)
