@@ -28,5 +28,7 @@
         - launchbar
         - silverlight
         - pallotron-yubiswitch
+        - evernote
+        - vlc
   vars:
     - ruby_version: 2.6.3
