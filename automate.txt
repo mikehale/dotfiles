@@ -1,0 +1,10 @@
+# Map caps lock to ctrl
+hidutil property --set '{"UserKeyMapping":[{"HIDKeyboardModifierMappingSrc":0x700000039,"HIDKeyboardModifierMappingDst":0x7000000E0}]}'
+hidutil property --set '{"UserKeyMapping":[]}' # remove
+
+/usr/libexec/PlistBuddy -c 'Delete com.apple.keyboard.modifiermapping.1452-636-0' ~/Library/Preferences/ByHost/.GlobalPreferences.*.plist
+/usr/libexec/PlistBuddy -c 'Add com.apple.keyboard.modifiermapping.1452-636-0 array' ~/Library/Preferences/ByHost/.GlobalPreferences.*.plist
+/usr/libexec/PlistBuddy -c 'Add com.apple.keyboard.modifiermapping.1452-636-0:0:HIDKeyboardModifierMappingSrc integer 30064771129' ~/Library/Preferences/ByHost/.GlobalPreferences.*.plist
+/usr/libexec/PlistBuddy -c 'Add com.apple.keyboard.modifiermapping.1452-636-0:0:HIDKeyboardModifierMappingDst integer 30064771300' ~/Library/Preferences/ByHost/.GlobalPreferences.*.plist
+
+plutil -p ~/Library/Preferences/ByHost/.GlobalPreferences.*.plist
