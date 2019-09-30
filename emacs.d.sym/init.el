@@ -268,6 +268,12 @@
   :diminish which-key-mode
   :config (which-key-mode))
 
+(use-package sh-script
+  :mode
+  ("zshrc*" . shell-script-mode)
+  ("zshenv*" . shell-script-mode)
+  ("zprofile*" . shell-script-mode))
+
 (use-package enh-ruby-mode
   :after (lsp-mode dap-mode)
   :defines     (end-ruby-deep-indent-paren end-ruby-deep-arglist)
