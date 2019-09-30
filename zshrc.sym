@@ -1,6 +1,7 @@
 source $HOME/projects/dotfiles/antigen/antigen.zsh
 antigen use oh-my-zsh
 antigen bundle robbyrussell/oh-my-zsh plugins/ruby
+antigen bundle robbyrussell/oh-my-zsh plugins/rbenv
 antigen bundle git
 antigen bundle heroku
 antigen bundle command-not-found
@@ -39,16 +40,6 @@ alias ic="ion-client"
 alias e="$EDITOR"
 alias be="bundle exec"
 alias ag="ag --color-line-number '1;34'"
-
-install_system_gem() {
-  for rbv in $(rbenv versions --bare); do
-    echo -e "RUBY $rbv\n========="
-    rbenv shell $rbv &&
-    gem install "$@" &&
-    gem cleanup "$@"
-    echo
-  done
-}
 
 if hash hub 2>/dev/null; then
   eval "$(hub alias -s)"
