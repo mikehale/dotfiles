@@ -308,45 +308,42 @@
   (enh-ruby-indent-level 2)
   (enh-ruby-add-encoding-comment-on-save nil)
 
-  ;; TODO: can this align stuff be removed now that I'm using lsp-mode?
-  :config      (progn
-                 (use-package bundler)
-                 ;; When you've hit the breakpoint, hit C-x C-q to enable inf-ruby
-                 (use-package inf-ruby :config (inf-ruby-switch-setup))
-                 (use-package rspec-mode)
-                 (require 'align)
+  :config
+  ;; When you've hit the breakpoint, hit C-x C-q to enable inf-ruby
+  (use-package inf-ruby :config (inf-ruby-switch-setup))
+  (use-package bundler)
+  (use-package rspec-mode)
+  (require 'align)
+  (add-to-list 'align-rules-list
+               '(ruby-comma-delimiter
+                 (regexp . ",\\(\\s-*\\)[^# \t\n]")
+                 (repeat . t)
+                 (modes  . '(enh-ruby-mode))))
 
-                 (add-to-list 'align-rules-list
-                              '(ruby-comma-delimiter
-                                (regexp . ",\\(\\s-*\\)[^# \t\n]")
-                                (repeat . t)
-                                (modes  . '(enh-ruby-mode))))
+  (add-to-list 'align-rules-list
+               '(ruby-hash-literal
+                 (regexp . "\\(\\s-*\\)=>\\s-*[^# \t\n]")
+                 (group 2 3)
+                 (repeat . t)
+                 (modes  . '(enh-ruby-mode))))
 
-                 (add-to-list 'align-rules-list
-                              '(ruby-hash-literal
-                                (regexp . "\\(\\s-*\\)=>\\s-*[^# \t\n]")
-                                (group 2 3)
-                                (repeat . t)
-                                (modes  . '(enh-ruby-mode))))
+  (add-to-list 'align-rules-list
+               '(ruby-hash-literal2
+                 (regexp . "[a-z0-9]:\\(\\s-*\\)[^# \t\n]")
+                 (repeat . t)
+                 (modes  . '(enh-ruby-mode))))
 
-                 (add-to-list 'align-rules-list
-                              '(ruby-hash-literal2
-                                (regexp . "[a-z0-9]:\\(\\s-*\\)[^# \t\n]")
-                                (repeat . t)
-                                (modes  . '(enh-ruby-mode))))
-
-                 (add-to-list 'align-rules-list
-                              '(ruby-assignment-literal
-                                (regexp . "\\(\\s-*\\)=\\s-*[^# \t\n]")
-                                (repeat . t)
-                                (modes  . '(enh-ruby-mode))))
-
-                 (add-to-list 'align-rules-list
-                              '(ruby-xmpfilter-mark
-                                (regexp . "\\(\\s-*\\)# => [^#\t\n]")
-                                (repeat . nil)
-                                (modes  . '(enh-ruby-mode))))
-                 ))
+  (add-to-list 'align-rules-list
+               '(ruby-assignment-literal
+                 (regexp . "\\(\\s-*\\)=\\s-*[^# \t\n]")
+                 (repeat . t)
+                 (modes  . '(enh-ruby-mode))))
+  (add-to-list 'align-rules-list
+               '(ruby-xmpfilter-mark
+                 (regexp . "\\(\\s-*\\)# => [^#\t\n]")
+                 (repeat . nil)
+                 (modes  . '(enh-ruby-mode))))
+  )
 
 (use-package go-mode
   :hook ((before-save . go-mode-before-save-fn))
