@@ -149,6 +149,17 @@
 ;;;
 
 (use-package smartparens
+  :bind (:map smartparens-mode-map
+              ("C-M-f" . sp-forward-sexp)
+              ("C-M-b" . sp-backward-sexp)
+              ("C-)" . sp-forward-slurp-sexp)
+              ("C-(" . sp-backward-slurp-sexp)
+              ("M-(" . sp-forward-barf-sexp)
+              ("M-)" . sp-backward-barf-sexp)
+              ("C-S-s" . sp-splice-sexp)
+              ("C-M-<backspace>" . backward-kill-sexp)
+              ("C-M-S-<SPC>" . (lambda () (interactive) (mark-sexp -1))))
+
   :hook ((prog-mode . smartparens-mode)
          (prog-mode . show-smartparens-mode)
          (emacs-lisp-mode . smartparens-strict-mode))
