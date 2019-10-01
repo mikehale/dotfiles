@@ -39,6 +39,9 @@
 (setq visual-line-fringe-indicators '(left-curly-arrow right-curly-arrow))
 ;; (setq line-move-visual nil)
 
+(setq linum-format "%4d | ")
+(global-linum-mode)
+
 ;; Misc
 ;;
 (setq load-prefer-newer t)    ; Please don't load outdated byte code
