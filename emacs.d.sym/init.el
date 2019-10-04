@@ -187,8 +187,10 @@
               ("C-<backspace>" . sp-backward-kill-word)
               ([remap sp-backward-kill-word] . backward-kill-word)
 
-              ("M-[" . sp-backward-unwrap-sexp)
-              ("M-]" . sp-unwrap-sexp)
+              ;; For some reason this breaks pasting into emacs:
+              ;; ("M-[" . sp-backward-unwrap-sexp)
+              ;; ("M-]" . sp-unwrap-sexp)
+              ;; --
 
               ("C-x C-t" . sp-transpose-hybrid-sexp)
 
@@ -198,39 +200,40 @@
               ("C-c '"  . wrap-with-single-quotes)
               ("C-c \"" . wrap-with-double-quotes)
               ("C-c _"  . wrap-with-underscores)
-              ("C-c `"  . wrap-with-back-quotes))
+              ("C-c `"  . wrap-with-back-quotes)
+              )
 
   :hook ((prog-mode . smartparens-mode)
          (prog-mode . show-smartparens-mode)
          (emacs-lisp-mode . smartparens-strict-mode))
   :config
-  (defmacro def-pairs (pairs)
-    "Define functions for pairing. PAIRS is an alist of (NAME . STRING)
-conses, where NAME is the function name that will be created and
-STRING is a single-character string that marks the opening character.
+  ;;   (defmacro def-pairs (pairs)
+  ;;     "Define functions for pairing. PAIRS is an alist of (NAME . STRING)
+  ;; conses, where NAME is the function name that will be created and
+  ;; STRING is a single-character string that marks the opening character.
 
-  (def-pairs ((paren . \"(\")
-              (bracket . \"[\"))
+  ;;   (def-pairs ((paren . \"(\")
+  ;;               (bracket . \"[\"))
 
-defines the functions WRAP-WITH-PAREN and WRAP-WITH-BRACKET,
-respectively."
-    `(progn
-       ,@(loop for (key . val) in pairs
-               collect
-               `(defun ,(read (concat
-                               "wrap-with-"
-                               (prin1-to-string key)
-                               "s"))
-                    (&optional arg)
-                  (interactive "p")
-                  (sp-wrap-with-pair ,val)))))
+  ;; defines the functions WRAP-WITH-PAREN and WRAP-WITH-BRACKET,
+  ;; respectively."
+  ;;     `(progn
+  ;;        ,@(loop for (key . val) in pairs
+  ;;                collect
+  ;;                `(defun ,(read (concat
+  ;;                                "wrap-with-"
+  ;;                                (prin1-to-string key)
+  ;;                                "s"))
+  ;;                     (&optional arg)
+  ;;                   (interactive "p")
+  ;;                   (sp-wrap-with-pair ,val)))))
 
-  (def-pairs ((paren . "(")
-              (bracket . "[")
-              (brace . "{")
-              (single-quote . "'")
-              (double-quote . "\"")
-              (back-quote . "`")))
+  ;;   (def-pairs ((paren . "(")
+  ;;               (bracket . "[")
+  ;;               (brace . "{")
+  ;;               (single-quote . "'")
+  ;;               (double-quote . "\"")
+  ;;               (back-quote . "`")))
   (require 'smartparens-config)
   :diminish smartparens-mode)
 
@@ -289,6 +292,8 @@ respectively."
   (setq-default xref-show-xrefs-function 'helm-xref-show-xrefs))
 
 (use-package lsp-mode
+  :bind (:map lsp-mode-map
+              ("C-c r"   . lsp-rename))
   :diminish lsp-mode
   :hook ((go-mode . lsp-deferred)
          (enh-ruby-mode . lsp-deferred)
