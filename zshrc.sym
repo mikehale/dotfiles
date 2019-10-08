@@ -45,9 +45,14 @@ if hash hub 2>/dev/null; then
   eval "$(hub alias -s)"
 fi
 
-if hash ion-client 2>/dev/null; then
-  cloud() {
-    eval "$(ion-client shell)"
+cloud() {
+  if hash ion-client 2>/dev/null; then
+    if [ ! -f ~/.ion-client-shell ]; then
+      ion-client shell > ~/.ion-client-shell
+    fi
+    source ~/.ion-client-shell
     cloud "$@"
-  }
-fi
+  else
+    echo "ion-client not installed"
+  fi
+}
