@@ -293,7 +293,11 @@
 
 (use-package lsp-mode
   :bind (:map lsp-mode-map
-              ("C-c r"   . lsp-rename))
+              ("C-c r"   . lsp-rename)
+              ("C-c C-r" . lsp-find-references)
+              ;; ("C-c C-j" . lsp-find-definitions)
+              ;; ("C-c i"   . lsp-find-implementation)
+              )
   :diminish lsp-mode
   :hook ((go-mode . lsp-deferred)
          (enh-ruby-mode . lsp-deferred)
