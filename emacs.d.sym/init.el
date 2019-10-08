@@ -352,6 +352,8 @@
   :config (which-key-mode))
 
 (use-package sh-script
+  :custom
+  (sh-basic-offset 2)
   :mode
   ("zshrc*" . shell-script-mode)
   ("zshenv*" . shell-script-mode)
