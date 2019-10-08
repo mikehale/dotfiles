@@ -1,5 +1,8 @@
 - homebrew: name=heroku/brew/heroku
   when: ansible_os_family == 'Darwin'
+  # brew install npm
+  # npm login
+  # gem install ion-client
 # heroku plugins:install api`
 # heroku plugins:install heroku-event-log`
 # heroku plugins:install heroku-pg-extras`
