@@ -1,8 +1,4 @@
 ---
-- homebrew:
-  when: ansible_os_family == 'Darwin'
-  name: "golang"
-
 - shell: "GO111MODULE=off go get golang.org/x/tools/gopls@latest"
   args:
     creates: "{{ ansible_facts['env']['GOBIN'] }}/gopls"

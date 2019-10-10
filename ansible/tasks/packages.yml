@@ -1,0 +1,22 @@
+---
+- homebrew:
+  when: ansible_os_family == 'Darwin'
+  name: "awscli, brew-gem, hub, jq, ossp-uuid, parallel, postgres, pstree, readline, redis, sslscan, the_silver_searcher, tmux, tree, watch, wget, zsh, reattach-to-user-namespace, ispell"
+  # - shell: brew services list | grep -q 'emacs.*stopped' && brew services start emacs
+  # - shell: brew services list | grep -q 'redis.*stopped' && brew services start redis
+  # - shell: brew services list | grep -q 'postgresql.*stopped' && brew services start postgresql
+- homebrew_cask: name={{item}}
+  when: ansible_os_family == 'Darwin'
+  with_items:
+    - 1password
+    - 1password-cli
+    - carbon-copy-cloner
+    - docker
+    - dropbox
+    - slack
+    - iterm2
+    - launchbar
+    - silverlight
+    - pallotron-yubiswitch
+    - evernote
+    - vlc

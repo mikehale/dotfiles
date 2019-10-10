@@ -1,34 +1,21 @@
 ---
 - hosts: all
+  roles:
+    - asdf
   tasks:
     - include: tasks/keyboard.yml
     - include: tasks/dotfiles.yml
     - include: tasks/homebrew.yml
     - include: tasks/golang.yml
-    - include: tasks/ruby.yml
     - include: tasks/emacs.yml
     - include: tasks/heroku.yml
     - include: tasks/vpn.yml
-    - homebrew:
-      when: ansible_os_family == 'Darwin'
-      name: "awscli, brew-gem, hub, jq, ossp-uuid, parallel, postgres, pstree, readline, redis, sslscan, the_silver_searcher, tmux, tree, watch, wget, zsh, reattach-to-user-namespace, ispell"
-    # - shell: brew services list | grep -q 'emacs.*stopped' && brew services start emacs
-    # - shell: brew services list | grep -q 'redis.*stopped' && brew services start redis
-    # - shell: brew services list | grep -q 'postgresql.*stopped' && brew services start postgresql
-    - homebrew_cask: name={{item}}
-      when: ansible_os_family == 'Darwin'
-      with_items:
-        - 1password
-        - 1password-cli
-        - carbon-copy-cloner
-        - docker
-        - dropbox
-        - slack
-        - iterm2
-        - launchbar
-        - silverlight
-        - pallotron-yubiswitch
-        - evernote
-        - vlc
+    - include: tasks/packages.yml
   vars:
-    - ruby_version: 2.6.3
+    - asdf_plugins:
+      - name: ruby
+        versions: ["2.6.3", "2.6.4"]
+        global: "2.6.4"
+      - name: golang
+        versions: ["1.12", "1.13"]
+        global: "1.13"

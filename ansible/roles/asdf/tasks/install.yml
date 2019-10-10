@@ -1,0 +1,4 @@
+---
+- homebrew:
+  when: ansible_os_family == 'Darwin'
+  name: "asdf, coreutils, automake, autoconf, openssl, libyaml, readline, libxslt, libtool, unixodbc, unzip, curl"

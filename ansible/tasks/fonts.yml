@@ -1,0 +1,7 @@
+---
+- homebrew_tap:
+    name: homebrew/cask-fonts
+- homebrew_cask:
+  when: ansible_os_family == 'Darwin'
+  name: "font-fira-code"
+

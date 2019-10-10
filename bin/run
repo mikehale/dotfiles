@@ -20,4 +20,5 @@ if ! hash ansible 2>/dev/null; then
   brew install ansible
 fi
 
+# ansible-galaxy install -r $ROOT_DIR/ansible/requirements.yml
 ansible-playbook $ROOT_DIR/ansible/playbook.yml --inventory $ROOT_DIR/ansible/hosts -v

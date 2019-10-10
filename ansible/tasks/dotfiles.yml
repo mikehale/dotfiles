@@ -18,6 +18,7 @@
     - gitignore
     - gitconfig
     - emacs.d
+    - default-gems
 - user:
     name: "{{ ansible_facts['env']['USER'] }}"
     shell: /usr/local/bin/zsh

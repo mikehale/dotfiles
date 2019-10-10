@@ -1,7 +1,7 @@
 source $HOME/projects/dotfiles/antigen/antigen.zsh
 antigen use oh-my-zsh
 antigen bundle robbyrussell/oh-my-zsh plugins/ruby
-antigen bundle robbyrussell/oh-my-zsh plugins/rbenv
+antigen bundle robbyrussell/oh-my-zsh plugins/asdf
 antigen bundle git
 antigen bundle heroku
 antigen bundle command-not-found
@@ -9,18 +9,12 @@ antigen bundle common-aliases
 antigen bundle brew
 antigen bundle compleat
 antigen bundle osx
-antigen bundle zsh-users/zsh-completions src
+antigen bundle zsh-users/zsh-completions
 antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle zsh-users/zsh-autosuggestions
-antigen theme gnzh
+antigen theme denysdovhan/spaceship-prompt
 antigen apply
 
-# The following lines were added by compinstall
-zstyle :compinstall filename "~/.zshrc"
-
-autoload -Uz compinit
-compinit
-# End of lines added by compinstall
 # Lines configured by zsh-newuser-install
 HISTFILE=~/.histfile
 HISTSIZE=1000
