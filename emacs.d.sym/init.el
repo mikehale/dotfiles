@@ -454,8 +454,9 @@
   "indent and clean buffer"
   (interactive)
   (delete-trailing-whitespace)
-  (indent-region (point-min) (point-max) nil)
-  (untabify (point-min) (point-max)))
+  (unless (derived-mode-p 'makefile-mode)
+    (indent-region (point-min) (point-max) nil)
+    (untabify (point-min) (point-max))))
 
 ;; Keybindings
 ;;
