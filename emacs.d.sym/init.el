@@ -428,9 +428,7 @@
   :after (lsp-mode dap-mode)
   :config
   (defun go-mode-before-save-fn ()
-    (when (eq major-mode 'go-mode)
-      (lsp-format-buffer)
-      (lsp-organize-imports)))
+    (format-buffer))
   (require 'dap-go)
   (dap-go-setup))
 
@@ -444,23 +442,27 @@
 
 ;; Functions
 ;;
+(defun format-buffer()
+  "format buffer"
+  (interactive)
+  (if (bound-and-true-p lsp-mode)
+      (progn (ignore-errors (lsp-organize-imports))
+             (lsp-format-buffer))
+    (cleanup-buffer)))
+
 (defun cleanup-buffer()
   "indent and clean buffer"
   (interactive)
-  (when (eq major-mode 'go-mode)
-    (lsp-format-buffer)
-    (lsp-organize-imports))
-  (when (not (eq major-mode 'go-mode))
-    (delete-trailing-whitespace)
-    (indent-region (point-min) (point-max) nil)
-    (untabify (point-min) (point-max))))
+  (delete-trailing-whitespace)
+  (indent-region (point-min) (point-max) nil)
+  (untabify (point-min) (point-max)))
 
 ;; Keybindings
 ;;
 (global-set-key (kbd "M-/") 'dabbrev-expand)
 (global-set-key (kbd "M-z") 'undo)
 (global-set-key (kbd "C-x C-k") 'kill-this-buffer)
-(global-set-key (kbd "C-c n") 'cleanup-buffer)
+(global-set-key (kbd "C-c n") 'format-buffer)
 
 ;; Window management
 ;;

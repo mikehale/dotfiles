@@ -1,6 +1,7 @@
 bundler
 pry
 rubocop
+rubocop-rspec
 ion-client
 lima
 solargraph
