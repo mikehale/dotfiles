@@ -424,11 +424,8 @@
   )
 
 (use-package go-mode
-  :hook ((before-save . go-mode-before-save-fn))
   :after (lsp-mode dap-mode)
   :config
-  (defun go-mode-before-save-fn ()
-    (format-buffer))
   (require 'dap-go)
   (dap-go-setup))
 
