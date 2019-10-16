@@ -11,3 +11,4 @@ package-lock.json
 custom_plan.rb
 zeus.json
 .tool-versions
+.env*

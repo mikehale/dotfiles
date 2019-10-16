@@ -260,7 +260,8 @@
 (use-package projectile
   :custom
   (projectile-completion-system 'helm)
-  :config
+	(projectile-git-ignored-command nil) ; also find ignored files
+	:config
   (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
   (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
   (projectile-mode +1)
