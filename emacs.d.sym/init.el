@@ -260,8 +260,8 @@
 (use-package projectile
   :custom
   (projectile-completion-system 'helm)
-	(projectile-git-ignored-command nil) ; also find ignored files
-	:config
+  (projectile-git-ignored-command nil) ; also find ignored files
+  :config
   (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
   (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
   (projectile-mode +1)
@@ -425,8 +425,12 @@
   )
 
 (use-package go-mode
+  :hook ((before-save . go-mode-before-save-fn))
   :after (lsp-mode dap-mode)
   :config
+  (defun go-mode-before-save-fn ()
+    (if (equal major-mode 'go-mode)
+        (format-buffer)))
   (require 'dap-go)
   (dap-go-setup))
 
