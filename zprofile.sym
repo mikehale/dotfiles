@@ -1,1 +1,1 @@
-export PATH=$GOBIN:$HOME/.asdf/shims:/usr/local/opt/asdf/bin:/usr/local/opt/qt@5.5/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin
+export PATH=$HOME/bin:$GOBIN:$HOME/.asdf/shims:/usr/local/opt/asdf/bin:/usr/local/opt/qt@5.5/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin
