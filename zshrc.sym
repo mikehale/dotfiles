@@ -51,22 +51,5 @@ cloud() {
   fi
 }
 
-lima-toggle () {
-  lima_oclif_path=$HOME/projects/heroku/lima-oclif
-  type=""
-
-  if [ -n $ZSH_VERSION ] ; then
-    type=$(whence -w lima | awk -F ': ' '{print $2}')
-  else
-    type=$(type -t lima)
-  fi
-
-  if [ "$type" = "alias" ] ; then
-    echo -e "Switching to ruby lima" >&2
-    unalias lima
-  else
-    echo -e "Switching to oclif lima" >&2
-    alias lima="$lima_oclif_path/bin/run"
-  fi
-}
-lima-toggle # default to oclif lima
+# added by travis gem
+[ -f /Users/mhale/.travis/travis.sh ] && source /Users/mhale/.travis/travis.sh
