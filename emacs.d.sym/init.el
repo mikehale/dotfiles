@@ -15,6 +15,8 @@
 (when (file-exists-p custom-file)
   (load custom-file t))
 
+(add-to-list 'load-path "~/.emacs.d/lisp/")
+
 ;; Formatting
 ;;
 (setq-default tab-width 2
@@ -47,6 +49,7 @@
 (setq load-prefer-newer t)    ; Please don't load outdated byte code
 (fset 'yes-or-no-p 'y-or-n-p) ; short answers
 (setq make-backup-files nil)  ; no backups
+(setq create-lockfiles nil)   ; no lockfiles
 
 ;; Bootstrap use-package
 ;;
@@ -59,6 +62,13 @@
 (setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
                          ("melpa-stable" . "https://stable.melpa.org/packages/")
                          ("melpa" . "https://melpa.org/packages/")))
+
+(setq package-archive-priorities
+      '(("melpa-stable" . 20)
+        ("marmalade" . 20)
+        ("gnu" . 10)
+        ("melpa" . 0)))
+
 (package-initialize)
 (when (not package-archive-contents)
   (package-refresh-contents))
@@ -67,9 +77,9 @@
   (package-refresh-contents)
   (package-install 'use-package))
 
+
 (require 'use-package-ensure)
 (setq use-package-always-ensure t
-      use-package-always-pin "melpa-stable"
       use-package-verbose t
       use-package-compute-statistics nil)
 
@@ -98,17 +108,18 @@
 
 ;; TODO: make sure this is still working
 (use-package server
-  :disabled
+  ;; :disabled
   :init (server-mode)
   :diminish server-buffer-clients)
 
 (use-package eldoc :diminish eldoc-mode)
 
+;; (use-package magit-popup)
 (use-package magit
   :bind   ("C-x g" . magit-status))
 
 (use-package dap-mode
-  :pin "melpa"
+  ;; :pin "melpa"
   :config
   (dap-mode t)
   (dap-ui-mode t)
@@ -308,6 +319,8 @@
   (lsp-signature-render-all t)
   (lsp-eldoc-render-all t)
   (lsp-prefer-flymake nil)
+  (lsp-response-timeout 25)
+  (lsp-file-watch-threshold nil)
   :commands lsp-deferred
   :config
   (defun disable-flymake-mode ()
