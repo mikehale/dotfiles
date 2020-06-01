@@ -13,4 +13,5 @@
 /emacs.d.sym/transient/
 /emacs.d.sym/.dap-breakpoints
 /emacs.d.sym/eshell
+/emacs.d.sym/.cache
 /zshenv.private.sym
