@@ -19,6 +19,7 @@
     - gitconfig
     - emacs.d
     - default-gems
+    - irbrc
 - user:
     name: "{{ ansible_facts['env']['USER'] }}"
     shell: /usr/local/bin/zsh

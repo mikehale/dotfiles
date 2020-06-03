@@ -388,7 +388,8 @@
                 ("Gemfile" . enh-ruby-mode)
                 ("Guardfile" . enh-ruby-mode)
                 ("Vagrantfile" . enh-ruby-mode)
-                ("\\.ru" . enh-ruby-mode))
+                ("\\.ru" . enh-ruby-mode)
+                ("\\.irbrc" . enh-ruby-mode))
   :custom
   (enh-ruby-bounce-deep-indent t)
   (enh-ruby-deep-indent-paren t)
