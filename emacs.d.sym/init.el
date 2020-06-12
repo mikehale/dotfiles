@@ -377,6 +377,11 @@
   ("zshenv*" . shell-script-mode)
   ("zprofile*" . shell-script-mode))
 
+(use-package js
+  :ensure nil
+  :config
+  (setq js-indent-level 2))
+
 (use-package enh-ruby-mode
   :after (lsp-mode dap-mode)
   :defines     (end-ruby-deep-indent-paren end-ruby-deep-arglist)
