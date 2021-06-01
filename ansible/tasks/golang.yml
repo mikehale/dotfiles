@@ -1,8 +1,8 @@
 ---
-- shell: "GO111MODULE=off go get golang.org/x/tools/gopls@latest"
+- shell: "GO111MODULE=on go get golang.org/x/tools/gopls@latest
   args:
     creates: "{{ ansible_facts['env']['GOBIN'] }}/gopls"
 
-- shell: "GO111MODULE=off go get github.com/go-delve/delve/cmd/dlv"
+- shell: "GO111MODULE=on go get github.com/go-delve/delve/cmd/dlv"
   args:
     creates: "{{ ansible_facts['env']['GOBIN'] }}/dlv"
